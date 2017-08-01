@@ -1,0 +1,28 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# http://editorconfig.org
+
+root = true
+
+[*]
+# indentation
+indent_style = space
+
+# generic
+charset = utf-8
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+# json
+[*.json]
+indent_style = space
+indent_size = 4
+
+# npm, bower packages
+[{package.json, bower.json}]
+indent_style = space
+indent_size = 2
