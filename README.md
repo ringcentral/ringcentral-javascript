@@ -1,5 +1,11 @@
 # RingCentral JavaScript Style Guide
 
+## Table of contents
+
+1. [Overview](#overview)
+1. [Language statements and features](#language-statements-and-features)
+1. [Spaces and alignments](#spaces-and-alignments)
+
 ## Overview
 
 This document provides a set of common rules regarding to source code in JavaScript.
@@ -9,7 +15,7 @@ It allow us to make and keep our codebase well organized and maintainable.
 
 ### Use brackets for all control constructs
 
-use brackets for all control constructs like ```if```, ```else```, ```try```, ```for```, '''while```. Even for one liners
+use brackets for all control constructs like ```if```, ```else```, ```try```, ```for```, ```while```. Even for one liners
 
 > Reason: using brackets makes code as predictable as possible. It avoid bugs caused to forgotten bracket by misprint. Also it's don't require developer to add/remove brackets when body of construct transform to multi lines from one line and vice versa. It makes diffs more clear.
 
