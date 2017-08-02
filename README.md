@@ -149,8 +149,8 @@ expect(actualValue, 'should contains foo, bar').
     to.have.ordered.members(['foo', 'bar']);
     
 // GOOD
-    expect(actualValue, 'should contains foo, bar')
-        .to.have.ordered.members(['foo', 'bar']);
+expect(actualValue, 'should contains foo, bar')
+    .to.have.ordered.members(['foo', 'bar']);
 ```
 
 ### Do not exceed 120 column width
@@ -176,7 +176,7 @@ if (foo < bar) {
 
 ### Do not use ```with``` statement
 
-Do not use ```with``` statement - it cause of bad maintainable code
+Do not use ```with``` statement - it cause of confusing and bad maintainable code
 
 ```javascript
 // BAD
@@ -218,7 +218,7 @@ let foo = {
 };
 ```
 
-### Do not add blank lines on beginning on ending functions
+### Do not add blank lines on beginning or ending functions
 
 ```javascript
 // BAD
@@ -233,5 +233,78 @@ function foo(baz) {
 function foo(baz) {
     const bar = 5;
     return bar * baz;
+}
+```
+
+### Set one space before function body curly bracket ```{```, do not set space after function name
+
+```javascript
+// BAD
+function isFooBar () {
+    // ...
+}
+
+// BAD
+function isFooBar(){
+    // ...
+}
+
+// GOOD
+function isFooBar() {
+    // ...
+}
+```
+
+### Set one space before nearly curly brackets ```{``` followed by keywords: (```do```, ```for```, ```if```, ```else```, etc.)
+
+```javascript
+// BAD
+if (isValid){
+    // ...
+}
+
+// GOOD
+if (isValid) {
+    // ...
+}
+
+// BAD
+while (foo > bar){
+    // ...
+}
+
+// GOOD
+while (foo > bar) {
+    // ...
+}
+```
+
+### Set one space around keywords (```do```, ```for```, ```if```, ```else```, etc.)
+
+```javascript
+// BAD
+if(isValid) {
+    foo();
+}else{
+    bar();
+    baz();
+}
+
+// GOOD 
+if (isValid) {
+    foo();
+} else {
+    bar();
+    baz();
+}
+
+// BAD
+for(const foo of listFoo) {
+    bar(foo);
+}
+
+// GOOD
+for (const foo of listFoo) {
+    bar(foo);
 }
 ```
