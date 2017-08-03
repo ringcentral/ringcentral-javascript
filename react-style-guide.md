@@ -218,6 +218,18 @@ const listItems = records.map((item, index) => <ListItem record={item} key={inde
 const listItems = records.map((item) => <ListItem record={item} key={item.id} />);
 ```
 
+### Avoid using ```forceUpdate()```
+
+Prefer ```this.props``` and ```this.state``` changes. It's enough for most of cases. When You think You needs to call ```forceUpdate()``` think twice. Likely something goes wrong with such component and You needs to review it life cycle and usage.
+
+### Avoid using ```refs```
+
+Prefer declarative approach versus imperative.
+
+### Avoid using context
+
+> Reason: it increase coupling between components
+
 ## Spaces and alignments
 
 ### For multi-line components put first property on separate new line
@@ -277,6 +289,7 @@ keep props alignment by following pattern
     <Baz />
 </Foo>
 ```
+
 ### Wrap component and components tree in round brackets
 
 ```javascript
@@ -314,7 +327,9 @@ return (
     </MyComponent>
 );
 ```
+
 ### Do not add extra spacing for properties
+
 ```javascript
 // BAD
 <ListOfThings foo = { bar } />
