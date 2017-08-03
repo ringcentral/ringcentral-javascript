@@ -8,6 +8,10 @@ Even it's looks so small, just don't do it.
 
 > Reason: It bad for code navigation. It's bad for component scale - the components grows eventually, and it's an extra work to split components by separate files when it's already has huge size. It's also cause extra merge conflicts. So, the better choice is always split components by separate files.
 
+### Avoid large components
+
+Ideally, it should not be more that 100 lines of code.
+
 ### Keep component methods and properties in specific order for better navigation
 ```render()``` should be the last method of class. Not the first, not in the middle. It should be last method.
 
@@ -226,9 +230,141 @@ Prefer ```this.props``` and ```this.state``` changes. It's enough for most of ca
 
 Prefer declarative approach versus imperative.
 
+Exception: It's ok to use refs for form elements.
+
 ### Avoid using context
 
 > Reason: it increase coupling between components
+
+### Do not use ```default``` keyword when export class
+
+> Reason: ```default``` cause of increasing entropy of naming. Follow this rule we mostly keep the same components naming across application codebase
+
+```javascript
+// BAD
+// Foo.js
+export default class Foo extends React.Component {
+    
+}
+
+// Bar.js
+import fooComponent from './Foo';
+// ...
+    render() {
+        return <fooComponent />;
+    }
+    
+// Baz.js
+import FooComponent from './Foo';
+// ...
+    render() {
+        return <FooComponent />;
+    }
+    
+// Quux.js
+import ILikeThisName from './Foo';
+// ...
+    render() {
+        return <ILikeThisName />;
+    }
+    
+// Corge.js - names collision
+import FooComponent from './Foo';
+import FooComponentVariant from '../common/Foo';
+// ...
+    render() {
+        return (
+            <div>
+                <FooComponent />
+                <FooComponentVariant />
+            </div>
+        );
+    }
+```
+
+```javascript
+
+// GOOD
+export class Foo extends React.Component {
+    
+}
+
+// Bar.js
+import {Foo} from './Foo';
+// ...
+    render() {
+        return <Foo />;
+    }
+
+// Baz.js
+import {Foo} from './Foo';
+// ...
+    render() {
+        return <Foo />;
+    }
+
+// Quux.js
+import {Foo} from './Foo';
+// ...
+    render() {
+        return <Foo />;
+    }
+
+// Corge.js - names collision
+import {Foo} from './Foo';
+import {Foo as FooVariant} from '../common/Foo';
+// ...
+    render() {
+        return (
+            <div>
+                <Foo />
+                <FooVariant />
+            </div>
+        );
+    }
+```
+
+### Use ```null``` vs ```undefined``` to omit component
+
+> Reason: it's predictable when passed ```null``` into JSX tree. ```undefined``` may be cause of unexpected flow.
+
+```javascript
+
+// BAD
+getFoo() {
+    if (isCondition()) {
+        return <Foo />;
+    }
+}
+
+render() {
+    return (
+        <div>
+            <Bar />
+            {this.getFoo()}
+        </div>
+    );
+}
+
+// GOOD
+getFoo() {
+    if (isCondition()) {
+        return <Foo />;
+    } else {
+        return null;
+    }
+}
+
+render() {
+    return (
+        <div>
+            <Bar />
+            {this.getFoo()}
+        </div>
+    );
+}
+
+```
 
 ## Spaces and alignments
 
@@ -253,7 +389,8 @@ keep props alignment by following pattern
 <ListOfThings
     foo={bar}
     fooBar={baz}
-    fooBarBaz />
+    fooBarBaz 
+    />
 ```
 
 ### For multi-line components keep one property per line
@@ -270,7 +407,41 @@ keep props alignment by following pattern
     foo={bar}
     fooBar={baz}
     barBaz
-    fooBarBaz />
+    fooBarBaz 
+    />
+```
+
+### For multi-line components put closing bracket at new line
+
+> Reason: it makes history more clear
+
+```javascript
+// BAD
+<MyAwesomeComponent
+    foo={bar}
+    baz />
+    
+// GOOD
+<MyAwesomeComponent
+    foo={bar}
+    baz 
+    />
+    
+// BAD
+<MyAwesomeComponent
+    foo={bar}
+    baz >
+    <ListOfThings />
+</MyAwesomeComponent>    
+    
+// GOOD
+<MyAwesomeComponent
+    foo={bar}
+    baz 
+    >
+    <ListOfThings />
+</MyAwesomeComponent>
+    
 ```
 
 ### Indent nested JSX
@@ -326,6 +497,26 @@ return (
         {tabs}
     </MyComponent>
 );
+```
+
+## Do not use round brackets for single line components
+
+```javascript
+// BAD
+let foo = (
+    <Foo bar baz="baz" />
+);
+
+// GOOD
+let foo = <Foo bar baz="baz" />
+
+// BAD
+return (
+    <Foo bar baz="baz" />
+);
+
+// GOOD
+return <Foo bar baz="baz" />;
 ```
 
 ### Do not add extra spacing for properties
