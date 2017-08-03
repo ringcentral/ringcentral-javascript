@@ -54,7 +54,7 @@ let foo = 'foo';
 let bar = ['bar', 'baz'];
 ```
 
-### Use separate var/const/let declaration per variable
+### Use separate ```var``` / ```const``` / ```let``` declaration per variable
 
 > Reason: it allows to avoid bugs with global scope variables (caused by misprinted comma). It's easier to maintain. It makes diffs more clear.
 
@@ -127,9 +127,47 @@ if (foo) {
 }
 return result;
 
+// BAD
+for (var i=0; i<AMOUNT; i++) {
+    var item = foo[i];
+}
 ```
 
-### Put dot before the property, don't leave it at the end of line
+### Prefer ```let``` vs ```var```
+
+> Reason: ```let``` is block scoped, vs ```var``` is function scoped. Using unassigned ```let``` variable cause an ```ReferenceError``` exception, but unassigned ```var``` still work silently without warnings and may cause hard to reproduce bugs. One more reason to use ```let``` is that redeclaration the same variable will trigger ```SyntaxError``` versus silent continuation of execution with ```var``` declaration
+
+```javascript
+// BAD
+function foo() {
+    var bar = baz();
+    // ...
+    var bar = null; // work
+}
+
+// GOOD
+function foo() {
+    let bar = baz();
+    // ...
+    let bar = baz(); // SyntaxError exception prevent re-declaration
+}
+
+// BAD
+function foo() {
+    baz(bar); // work, bar === undefined
+    // ...
+    var bar = 'bar'; 
+}
+
+// GOOD
+function foo() {
+    baz(bar); // SyntaxError
+    // ...
+    let bar = 'bar'; 
+}
+```
+
+### Put dot ```.``` before the property, don't leave it at the end of line
 
 ```javascript
 // BAD
@@ -153,10 +191,6 @@ expect(actualValue, 'should contains foo, bar')
     .to.have.ordered.members(['foo', 'bar']);
 ```
 
-### Do not exceed 120 column width
-
-> Reason: It's hard to read and maintain
-
 ### Do not use ternary inside ternary - no nested ternary
 
 It's really hard to maintain such code
@@ -174,6 +208,10 @@ if (foo < bar) {
 }
 ```
 
+### Put all imports at the top of file
+
+> Reason: it's improve file navigation
+
 ### Do not use ```with``` statement
 
 Do not use ```with``` statement - it cause of confusing and bad maintainable code
@@ -188,6 +226,10 @@ with (_) {
 trace(_.sort(bar), _.trim(baz));
 ```
 
+### Avoid using nested functions
+
+> Reason: it bad for testing and maintaining. It's always better to make separate, outer-scope free functions and methods instead of mash of inner functions. 
+
 ### Do not leave console calls
 
 Do not leave console calls in your code
@@ -197,6 +239,10 @@ Do not leave console calls in your code
 > Reason: it just a noise for other developers. We always can find anything using history of version control system.
 
 ## Spaces and alignments
+
+### Do not exceed 120 column width
+
+> Reason: It's hard to read and maintain
 
 ### Do not align values horizontally
 
