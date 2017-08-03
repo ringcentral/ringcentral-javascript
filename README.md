@@ -5,6 +5,7 @@
 1. [Overview](#overview)
 1. [Language statements and features](#language-statements-and-features)
 1. [Spaces and alignments](#spaces-and-alignments)
+1. [Naming](#naming)
 
 ## Overview
 
@@ -131,6 +132,46 @@ return result;
 for (var i=0; i<AMOUNT; i++) {
     var item = foo[i];
 }
+``` 
+
+### Don't define functions inside block
+
+```javascript
+// BAD
+function qux() {
+    if (foo) {
+        function bar() {
+            // ...
+        }
+        // ...
+        bar();
+    }
+}
+
+// GOOD
+function qux() {
+    if (foo) {
+        // ...
+        bar();
+    }
+}
+
+function bar() {
+    // ...
+}
+
+// GOOD, but avoid inner functions
+function qux() {
+    if (foo) {
+        // ...
+        bar();
+    }
+    
+    function bar() {
+        // ...
+    }
+}
+
 ```
 
 ### Prefer ```let``` vs ```var```
@@ -354,3 +395,51 @@ for (const foo of listFoo) {
     bar(foo);
 }
 ```
+
+## Naming
+
+Naming should be expressive. It should be maximally clear and avoid unnecessary abbreviations.
+
+*ClassName* should begin with Letter in upper case.
+```javascript
+// GOOD
+ThingsStore.js
+Logger.js
+```
+
+*methodName* should be verbs like and be in *camelCase*
+```javascript
+// GOOD
+sumbitMessage(message) { /* */ }
+save(data) {/* */ }
+hasMessages() { /* */ }
+```
+
+*variableName* should be in *camelCase*
+```javascript
+// GOOD
+let store = new Store();
+let formatParser = getParser();
+```
+
+*ENUMERIC_CONSTANTS* should be *ALL_IN_UPPER_CASE*
+```javascript
+// GOOD
+const MODE_EDIT = 'MODE_EDIT';
+const PARSER_ID_MARKDOWN = 14;
+```
+
+Boolean variables and methods who returns Boolean values should contains verb prefix (```has```, ```is```, ```should```, etc.)
+```javascript
+// GOOD
+const isValid = isEmail(email);
+
+// GOOD
+let canProceedFlow = this.getListLength() > 0;
+
+isUserAuthorized() {
+    if ( /** */ ) {
+        return true;        
+    }
+}
+``` 
