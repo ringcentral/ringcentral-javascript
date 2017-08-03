@@ -285,6 +285,8 @@ Do not leave console calls in your code
 
 > Reason: It's hard to read and maintain
 
+Exception: long links and international strings can exceed that limitation
+
 ### Do not align values horizontally
 
 > Reason: alignment may increase readability for some cases, but it's a root of few problems. It bad for maintaining, because of change of one line can trigger realignment of all nearest aligned lines. So, owner of such change will mislead reviewers, and makes commits history dirty. Also it cause a redundant merge conflicts.
