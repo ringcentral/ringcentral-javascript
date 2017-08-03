@@ -249,6 +249,27 @@ if (foo < bar) {
 }
 ```
 
+### Make function calls clear and predictable
+
+```javascript
+// BAD 
+condition && foo();
+
+// GOOD
+if (condition === true) {
+    foo();
+}
+
+// BAD 
+isCondition && foo();
+
+// GOOD
+if (isCondition) {
+    foo();
+}
+
+```
+
 ### Put all imports at the top of file
 
 > Reason: it's improve file navigation
@@ -305,24 +326,6 @@ let foo = {
     second: 'bar',
     thisOneIsLong: 'baz'
 };
-```
-
-### Do not add blank lines on beginning or ending functions
-
-```javascript
-// BAD
-function foo(baz) {
-
-    const bar = 5;
-    return bar * baz;
-
-}
-
-// GOOD
-function foo(baz) {
-    const bar = 5;
-    return bar * baz;
-}
 ```
 
 ### Set one space before function body curly bracket ```{```, do not set space after function name
@@ -388,6 +391,22 @@ if (isValid) {
 }
 
 // BAD
+if(isValid) {
+    foo();
+}else if(quux < 0){
+    bar();
+    baz();
+}
+
+// GOOD
+if(isValid) {
+    foo();
+} else if (quux < 0) {
+    bar();
+    baz();
+}
+
+// BAD
 for(const foo of listFoo) {
     bar(foo);
 }
@@ -398,10 +417,52 @@ for (const foo of listFoo) {
 }
 ```
 
+### Do not new line before ```else``` or ```if else```
+
+```javascript
+// BAD
+if (isFoo(bar)) {
+    foo();
+}
+else {
+    bar();
+}
+
+// GOOD
+if (isFoo(bar)) {
+    foo();
+} else {
+    bar();
+}
+
+// BAD
+if (isFoo(bar)) {
+    foo();
+} else if (quux > baz)
+{
+    bar();
+}
+else {
+    bar();
+    barBaz();
+}
+
+// GOOD
+if (isFoo(bar)) {
+    foo();
+} else if (quux > baz) {
+    bar();
+} else {
+    bar();
+    barBaz();
+}
+``` 
+
 ## Naming
 
 Naming should be expressive. It should be maximally clear and avoid unnecessary abbreviations.
 
+*ClassName* should be same as *ClassName*.js. Avoid multiple classes per file.
 *ClassName* should begin with Letter in upper case.
 ```javascript
 // GOOD
@@ -440,7 +501,7 @@ const isValid = isEmail(email);
 let canProceedFlow = this.getListLength() > 0;
 
 isUserAuthorized() {
-    if ( /** */ ) {
+    if ( /* */ ) {
         return true;        
     }
 }
