@@ -18,7 +18,7 @@ It allow us to make and keep our codebase well organized and maintainable.
 
 use brackets for all control constructs like ```if```, ```else```, ```try```, ```for```, ```while```. Even for one liners
 
-> Reason: using brackets makes code as predictable as possible. It avoid bugs caused to forgotten bracket by misprint. Also it's don't require developer to add/remove brackets when body of construct transform to multi lines from one line and vice versa. It makes diffs more clear.
+> Reason: using brackets makes code as predictable as possible. It avoid bugs caused to forgotten bracket by misprint. Also it's don't require developer to add/remove brackets when body of construct transform from one line to multi-line form and vice versa. It makes diffs more clear.
 
 ```javascript
 // BAD
@@ -270,7 +270,7 @@ if (isCondition) {
 
 ```
 
-### Put all imports at the top of file
+### Put all non dynamic imports at the top of file
 
 > Reason: it's improve file navigation
 
@@ -399,7 +399,7 @@ if(isValid) {
 }
 
 // GOOD
-if(isValid) {
+if (isValid) {
     foo();
 } else if (quux < 0) {
     bar();
