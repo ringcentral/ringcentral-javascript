@@ -128,9 +128,19 @@ if (foo) {
 }
 return result;
 
+// GOOD
+if (foo) {
+    let result = true;
+}
+
 // BAD
 for (var i=0; i<AMOUNT; i++) {
     var item = foo[i];
+}
+
+// GOOD
+for (let i=0; i<AMOUNT; i++) {
+    let item = foo[i];
 }
 ``` 
 
@@ -336,10 +346,7 @@ function isFooBar () {
     // ...
 }
 
-// BAD
-function isFooBar(){
-    // ...
-}
+
 
 // GOOD
 function isFooBar() {

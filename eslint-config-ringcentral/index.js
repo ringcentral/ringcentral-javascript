@@ -23,18 +23,47 @@ module.exports = {
         sinon: true
     },
     rules: {
-
+        // avoid variable hoisting issues
         // http://eslint.org/docs/rules/block-scoped-var
         'block-scoped-var': 'warn',
 
+        // line breaks before braces
+        // http://eslint.org/docs/rules/brace-style
+        'brace-style': ['warn', '1tbs'],
+
+        // require brackets for all statements
         // http://eslint.org/docs/rules/curly
-        'curly': ['warn', 'all'],
+        curly: ['warn', 'all'],
 
         // http://eslint.org/docs/rules/dot-location
         'dot-location': ['warn', 'property'],
 
+        // require strict compare using === and !==
+        // http://eslint.org/docs/rules/eqeqeq
+        eqeqeq: ['warn', 'always'],
+
+        // http://eslint.org/docs/rules/keyword-spacing.html
+        'keyword-spacing': [
+            'warn',
+            {
+                before: true,
+                after: true,
+                overrides: {
+                    return: { after: true },
+                    throw: { after: true },
+                    case: { after: true }
+                }
+            }
+        ],
+
         // http://eslint.org/docs/rules/max-len
-        'max-len': ['warn', {code: 120}],
+        'max-len': [
+            'warn',
+            {
+                code: 120,
+                ignoreUrls: true
+            }
+        ],
 
         // http://eslint.org/docs/rules/no-case-declarations
         'no-case-declarations': 'off',
@@ -56,6 +85,9 @@ module.exports = {
 
         // http://eslint.org/docs/rules/no-extra-boolean-cast
         'no-extra-boolean-cast': 'off',
+
+        // http://eslint.org/docs/rules/no-inner-declarations
+        'no-inner-declarations': ['warn', 'both'],
 
         // http://eslint.org/docs/rules/no-nested-ternary
         'no-nested-ternary': 'warn',
@@ -82,6 +114,11 @@ module.exports = {
             }
         ],
 
+        // prefer let vs var
+        // http://eslint.org/docs/rules/no-var
+        'no-var': 'warn',
+
+        // dismiss 'with' keyword usage
         // http://eslint.org/docs/rules/no-with
         'no-with': 'warn',
 
@@ -89,7 +126,20 @@ module.exports = {
         'one-var': ['warn', 'never'],
 
         // http://eslint.org/docs/rules/semi
-        'semi': 'warn',
+        semi: 'warn',
+
+        // http://eslint.org/docs/rules/space-before-blocks.html
+        'space-before-blocks': ['warn', 'always'],
+
+        // http://eslint.org/docs/rules/space-before-function-paren
+        'space-before-function-paren': [
+            'warn',
+            {
+                anonymous: 'never',
+                named: 'never',
+                asyncArrow: 'always'
+            }
+        ],
 
 
         // react specifics
@@ -124,7 +174,7 @@ module.exports = {
         'react/jsx-no-duplicate-props': 'warn',
 
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-undef.md
-        'react/jsx-no-undef': 'error',
+        'react/jsx-no-undef': 'warn',
 
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md
         'react/jsx-uses-react': 'error',
