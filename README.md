@@ -1,6 +1,6 @@
 # RingCentral JavaScript Style Guide
 
-React-specific guidelines described at [RingCentral React Style Guide](https://github.com/ringcentral/react-style-guide)
+React-specific guidelines described at [RingCentral React Style Guide](https://github.com/ringcentral/ringcentral-javascript/tree/master/react-style-guide)
 
 ## Table of contents
 

@@ -1,6 +1,6 @@
 # eslint-config-ringcentral
 
-The eslint sharable config for the [RingCentral JavaScript Style Guide](https://github.com/ringcentral/ringcentral-javascript) and [RingCentral React Style Guide](https://github.com/ringcentral/ringcentral-javascript/react-style-guide)
+The eslint sharable config for the [RingCentral JavaScript Style Guide](https://github.com/ringcentral/ringcentral-javascript) and [RingCentral React Style Guide](https://github.com/ringcentral/ringcentral-javascript/tree/master/react-style-guide)
 
 ## Usage
 
