@@ -7,7 +7,7 @@ The eslint sharable config for the [RingCentral JavaScript Style Guide](https://
 Install packages
 
 ```bash
-npm install eslint eslint-plugin-import eslint-plugin-react eslinc-config-ringcentral --save-dev
+npm install eslint eslint-plugin-import eslint-plugin-react eslint-config-ringcentral --save-dev
 ```
 
 Create linter config or edit your own at the root directory of your project
