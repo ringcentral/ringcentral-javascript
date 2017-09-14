@@ -390,7 +390,7 @@ keep props alignment by following pattern
     foo={bar}
     fooBar={baz}
     fooBarBaz 
-    />
+/>
 ```
 
 ### For multi-line components keep one property per line
@@ -408,7 +408,7 @@ keep props alignment by following pattern
     fooBar={baz}
     barBaz
     fooBarBaz 
-    />
+/>
 ```
 
 ### For multi-line components put closing bracket at new line
@@ -425,7 +425,7 @@ keep props alignment by following pattern
 <MyAwesomeComponent
     foo={bar}
     baz 
-    />
+/>
     
 // BAD
 <MyAwesomeComponent
@@ -438,7 +438,7 @@ keep props alignment by following pattern
 <MyAwesomeComponent
     foo={bar}
     baz 
-    >
+>
     <ListOfThings />
 </MyAwesomeComponent>
     
