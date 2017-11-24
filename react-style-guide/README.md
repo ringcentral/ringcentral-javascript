@@ -71,9 +71,7 @@ class Foo extends React.Component {
     
     getBar() {
         if (this.props.hasBar) {
-            return (
-                <Bar />
-            );
+            return <Bar />;
         } else {
             return null;
         }
@@ -99,9 +97,7 @@ class Foo extends React.Component {
 
     getBar() {
         if (this.props.hasBar) {
-            return (
-                <Bar />
-            );
+            return <Bar />;
         } else {
             return null;
         }
@@ -133,9 +129,7 @@ class Foo extends React.Component {
 
     getBar() {
         if (this.props.hasBar) {
-            return (
-                <Bar />
-            );
+            return <Bar />;
         } else {
             return null;
         }
