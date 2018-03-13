@@ -407,8 +407,6 @@ keep props alignment by following pattern
 
 ### For multi-line components put closing bracket at new line
 
-> Reason: it makes history more clear
-
 ```javascript
 // BAD
 <MyAwesomeComponent
@@ -424,15 +422,15 @@ keep props alignment by following pattern
 // BAD
 <MyAwesomeComponent
     foo={bar}
-    baz >
+    baz
+>
     <ListOfThings />
 </MyAwesomeComponent>    
     
 // GOOD
 <MyAwesomeComponent
     foo={bar}
-    baz 
->
+    baz>
     <ListOfThings />
 </MyAwesomeComponent>
     

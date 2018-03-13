@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-ringcentral",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "ESLint config for the RingCentral style guide",
   "main": "index.js",
   "scripts": {

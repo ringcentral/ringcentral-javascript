@@ -168,7 +168,7 @@ module.exports = {
             'warn',
             {
                 selfClosing: 'tag-aligned',
-                nonEmpty: 'tag-aligned'
+                nonEmpty: 'after-props'
             }
         ],
 
