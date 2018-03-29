@@ -216,6 +216,91 @@ const listItems = records.map((item, index) => <ListItem record={item} key={inde
 const listItems = records.map((item) => <ListItem record={item} key={item.id} />);
 ```
 
+### Do not bind function inside ```render()``` and render-related functions
+> Reason: it's bad from the performance perspective of view
+
+For ```this``` binding use following pattern:
+
+```javascript
+// GOOD
+class Foo extends React.Component {
+
+    handleButtonClick = event => {
+        // 
+    };
+    
+    render() {
+        const {children} = this.props;
+        return (
+            <button onClick={this.handleButtonClick}>
+                {children}
+            </button>
+        );
+    }
+}
+```
+
+```javascript
+// BAD
+class Foo extends React.Component {
+
+    handleButtonClick(event) {
+        // 
+    }
+    
+    render() {
+        const {children} = this.props;
+        return (
+            <button onClick={this.handleButtonClick.bind(this)}>
+                {children}
+            </button>
+        );
+    }
+}
+
+// BAD
+class Foo extends React.Component {
+
+    handleButtonClick(event) {
+        // 
+    }
+    
+    render() {
+        const {children} = this.props;
+        return (
+            <button onClick={::this.handleButtonClick}>
+                {children}
+            </button>
+        );
+    }
+}
+
+// BAD
+class Foo extends React.Component {
+
+    constructor(props, context) {
+        super(props, context);
+        
+        // well optimized, but bad for maintenance, 
+        // because requires double declaration for each method
+        this.handleButtonClick = ::this.handleButtonClick; 
+    }
+
+    handleButtonClick(event) {
+        // 
+    }
+    
+    render() {
+        const {children} = this.props;
+        return (
+            <button onClick={this.handleButtonClick}>
+                {children}
+            </button>
+        );
+    }
+}
+```
+
 ### Avoid using ```forceUpdate()```
 
 Prefer ```this.props``` and ```this.state``` changes. It's enough for most of cases. When You think You needs to call ```forceUpdate()``` think twice. Likely something goes wrong with such component and You needs to review it life cycle and usage.
