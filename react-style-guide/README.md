@@ -488,6 +488,11 @@ keep props alignment by following pattern
     barBaz
     fooBarBaz 
 />
+
+// GOOD
+<ListOfThings foo={bar} barBaz>
+    <MyAwesomeComponent />
+<ListOfThings/>
 ```
 
 ### For multi-line components put closing bracket at new line
