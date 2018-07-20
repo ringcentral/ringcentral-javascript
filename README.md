@@ -426,7 +426,7 @@ for (const foo of listFoo) {
 }
 ```
 
-### Do not new line before ```else``` or ```if else```
+### Do not new line before ```else``` or ```else if```
 
 ```javascript
 // BAD
