@@ -515,3 +515,57 @@ isUserAuthorized() {
     }
 }
 ``` 
+
+### Handlers naming
+
+To make handlers organized keep following rules:  
+
+use `handle` prefix for class members
+use `on` prefix for component props
+use first-verb form of words in names
+
+```javascript
+export class MyAwesomeComponent extends React.PureComponent {
+    
+    // ...
+    
+    // GOOD
+    handleClose = () => {
+        // event handler logic
+    };
+    
+    // GOOD
+    handleNextButtonClick = event => {
+        // event handler logic
+    };
+    
+    // GOOD
+    handlePrevButtonClick = event => {
+        // event handler logic
+    };
+    
+    // ALSO GOOD
+    handleMediaStreamViewConnect = payload => {
+        // event handler logic
+    };
+    
+    // STILL GOOD
+    handleStreamQualityChange = nextValue => {
+        // event handler logic
+    };
+    
+    render() {
+        return (
+            <Panel closable onClose={this.handleClose}>
+                <MediaStreamView
+                    stream={this.getStream()}
+                    onConnect={this.handleMediaStreamViewConnect}
+                    onStreamQualityChange={this.handleStreamQualityChange}
+                />
+                <Button onClick={this.handlePrevButtonClick}Prev</Button>
+                <Button onClick={this.handleNextButtonClick}>Next</Button>
+            </Panel>
+        );
+    }
+}
+```
