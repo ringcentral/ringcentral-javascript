@@ -521,7 +521,11 @@ isUserAuthorized() {
 To make handlers organized keep following rules:  
 
 use `handle` prefix for class members
+
 use `on` prefix for component props
+
+use action right away after prefix `onClickButton` no `onButtonClick`
+
 use first-verb form of words in names
 
 ```javascript
@@ -535,22 +539,22 @@ export class MyAwesomeComponent extends React.PureComponent {
     };
     
     // GOOD
-    handleNextButtonClick = event => {
+    handleClickNextButton = event => {
         // event handler logic
     };
     
     // GOOD
-    handlePrevButtonClick = event => {
+    handleClickPrevButton = event => {
         // event handler logic
     };
     
     // ALSO GOOD
-    handleMediaStreamViewConnect = payload => {
+    handleConnectMediaStreamView = payload => {
         // event handler logic
     };
     
     // STILL GOOD
-    handleStreamQualityChange = nextValue => {
+    handleChangeStreamQuality = nextValue => {
         // event handler logic
     };
     
@@ -559,11 +563,11 @@ export class MyAwesomeComponent extends React.PureComponent {
             <Panel closable onClose={this.handleClose}>
                 <MediaStreamView
                     stream={this.getStream()}
-                    onConnect={this.handleMediaStreamViewConnect}
-                    onStreamQualityChange={this.handleStreamQualityChange}
+                    onConnect={this.handleConnectMediaStreamView}
+                    onChangeStreamQuality={this.handleChangeStreamQuality}
                 />
-                <Button onClick={this.handlePrevButtonClick}Prev</Button>
-                <Button onClick={this.handleNextButtonClick}>Next</Button>
+                <Button onClick={this.handleClickPrevButton}Prev</Button>
+                <Button onClick={this.handleClickNextButton}>Next</Button>
             </Panel>
         );
     }
