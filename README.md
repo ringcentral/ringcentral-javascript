@@ -57,6 +57,46 @@ let foo = 'foo';
 let bar = ['bar', 'baz'];
 ```
 
+### Use trailing comma
+
+For multi-line structures, the trailing comma is required. For oneline definitions it should not be used.
+
+> Reason: it helps to make history and code review cleaner
+
+```javascript
+// BAD
+let foo = {bar: 1, baz: 5,};
+let bar = ['bar', 'baz',];
+
+// GOOD
+let foo = {bar: 1, baz: 5};
+let bar = ['bar', 'baz'];
+
+// BAD
+let foo = {
+    bar: 1,
+    baz: 5,
+    qux: 8
+};
+let bar = [
+    'bar',
+    'baz',
+    'qux'
+];
+
+// GOOD
+let foo = {
+    bar: 1,
+    baz: 5,
+    qux: 8,
+};
+let bar = [
+    'bar',
+    'baz',
+    'qux',
+];
+```
+
 ### Use separate ```var``` / ```const``` / ```let``` declaration per variable
 
 > Reason: it allows to avoid bugs with global scope variables (caused by misprinted comma). It's easier to maintain. It makes diffs more clear.
@@ -329,14 +369,14 @@ Exception: long links and international strings can exceed that limitation
 let foo = {
     first:          'foo',
     second:         'bar',
-    thisOneIsLong:  'baz'
+    thisOneIsLong:  'baz',
 };
 
 // GOOD
 let foo = {
     first: 'foo',
     second: 'bar',
-    thisOneIsLong: 'baz'
+    thisOneIsLong: 'baz',
 };
 ```
 

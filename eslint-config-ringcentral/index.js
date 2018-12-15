@@ -31,6 +31,10 @@ module.exports = {
         // http://eslint.org/docs/rules/brace-style
         'brace-style': ['error', '1tbs'],
 
+        // require a trailing comma for multiline arrays/objects
+        // https://eslint.org/docs/rules/comma-dangle
+        'comma-dangle': ['error', 'always-multiline'],
+
         // require brackets for all statements
         // http://eslint.org/docs/rules/curly
         curly: ['error', 'all'],
