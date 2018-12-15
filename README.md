@@ -61,7 +61,7 @@ let bar = ['bar', 'baz'];
 
 For multi-line structures, the trailing comma is required. For oneline definitions it should not be used.
 
-> Reason: it helps to make history and code review cleaner
+> Reason: it helps to make history and code review cleaner. It allows to move/remove the last element without changing a previous line.
 
 ```javascript
 // BAD
