@@ -608,7 +608,7 @@ export class MyCompositeComponent {
     }
     
     // BAD - should be renderCommentsList
-    getComemntsList() {
+    getCommentsList() {
         let {id} = this.props;
         
         return <ResourceCommentsList resourceId={id} />;
@@ -619,7 +619,7 @@ export class MyCompositeComponent {
             <div>
                 {this.renderHeaderToolbar()}
                 {this.renderImageBlock()}
-                {this.getComemntsList()}
+                {this.getCommentsList()}
             </div>
         );
     }
