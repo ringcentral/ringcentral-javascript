@@ -576,8 +576,7 @@ export class MyAwesomeComponent extends React.PureComponent {
 
 ### renderXXX
 
-For better navigation, use `render` prefix for any method who returns JSX or component.  
-Of course it is possible to use another prefixes like `get` or even `display`, but in terms of React we recommend to use `renderXXX`.
+For better navigation, we recommend to use `render` prefix for any method which returns JSX or component.  
 
 ```javascript
 export class MyCompositeComponent {
@@ -608,11 +607,19 @@ export class MyCompositeComponent {
         );
     }
     
+    // BAD - should be renderCommentsList
+    getComemntsList() {
+        let {id} = this.props;
+        
+        return <ResourceCommentsList resourceId={id} />;
+    }
+    
     render() {
         return (
             <div>
                 {this.renderHeaderToolbar()}
                 {this.renderImageBlock()}
+                {this.getComemntsList()}
             </div>
         );
     }
