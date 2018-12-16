@@ -635,6 +635,12 @@ _.indexOf([1, 2, 3], 1);
 ```
 ```javascript
 // BAD
+_.includes([1, 2, 3], 1);
+// GOOD
+[1, 2, 3].includes(1);
+```
+```javascript
+// BAD
 const first = _.first([1, 2, 3]);
 // GOOD
 const [first] = [1, 2, 3];
