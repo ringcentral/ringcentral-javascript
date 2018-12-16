@@ -575,7 +575,7 @@ export class MyAwesomeComponent extends React.PureComponent {
 ```
 ## Exteranl libraries
 
-### Prefer native methods vs lodash
+### Prefer native js vs lodash
 
 > Reason: lodash is a great library which contains a lot of useful functions but the modern js has the short identical part of this functionality so some lodash functions are excess alternative.
 
