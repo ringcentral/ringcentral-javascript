@@ -57,7 +57,41 @@ let foo = 'foo';
 let bar = ['bar', 'baz'];
 ```
 
-### Use separate ```var``` / ```const``` / ```let``` declaration per variable
+### Prefer ```const``` / ```let``` vs ```var```
+
+> Reason: ```const``` / ```let``` is block scoped, vs ```var``` is function scoped. Using unassigned ```const``` / ```let``` variable cause an ```ReferenceError``` exception, but unassigned ```var``` still work silently without warnings and may cause hard to reproduce bugs. One more reason to use ```const``` / ```let``` is that redeclaration the same variable will trigger ```SyntaxError``` versus silent continuation of execution with ```var``` declaration
+
+```javascript
+// BAD
+function foo() {
+    var bar = baz();
+    // ...
+    var bar = null; // work
+}
+
+// GOOD
+function foo() {
+    let bar = baz();
+    // ...
+    let bar = baz(); // SyntaxError exception prevent re-declaration
+}
+
+// BAD
+function foo() {
+    baz(bar); // work, bar === undefined
+    // ...
+    var bar = 'bar'; 
+}
+
+// GOOD
+function foo() {
+    baz(bar); // SyntaxError
+    // ...
+    let bar = 'bar'; 
+}
+```
+
+### Use separate ```const``` / ```let``` declaration per variable
 
 > Reason: it allows to avoid bugs with global scope variables (caused by misprinted comma). It's easier to maintain. It makes diffs more clear.
 
@@ -111,41 +145,6 @@ if (foo.bar === true) {
 }
 ```
 
-### Don't use ```var``` inside block
-
-It's a bad practice and may cause scope side bugs. See [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/block) for reference.
-For block-scoped definition use ```const``` or ```let```.
-
-```javascript
-// BAD
-if (foo) {
-    var result = 'foo';
-}
-return result;
-
-// GOOD
-var result;
-if (foo) {
-    result = true;
-}
-return result;
-
-// GOOD
-if (foo) {
-    let result = true;
-}
-
-// BAD
-for (var i=0; i<AMOUNT; i++) {
-    var item = foo[i];
-}
-
-// GOOD
-for (let i=0; i<AMOUNT; i++) {
-    let item = foo[i];
-}
-``` 
-
 ### Don't define functions inside block
 
 ```javascript
@@ -184,40 +183,6 @@ function qux() {
     }
 }
 
-```
-
-### Prefer ```let``` vs ```var```
-
-> Reason: ```let``` is block scoped, vs ```var``` is function scoped. Using unassigned ```let``` variable cause an ```ReferenceError``` exception, but unassigned ```var``` still work silently without warnings and may cause hard to reproduce bugs. One more reason to use ```let``` is that redeclaration the same variable will trigger ```SyntaxError``` versus silent continuation of execution with ```var``` declaration
-
-```javascript
-// BAD
-function foo() {
-    var bar = baz();
-    // ...
-    var bar = null; // work
-}
-
-// GOOD
-function foo() {
-    let bar = baz();
-    // ...
-    let bar = baz(); // SyntaxError exception prevent re-declaration
-}
-
-// BAD
-function foo() {
-    baz(bar); // work, bar === undefined
-    // ...
-    var bar = 'bar'; 
-}
-
-// GOOD
-function foo() {
-    baz(bar); // SyntaxError
-    // ...
-    let bar = 'bar'; 
-}
 ```
 
 ### Put dot ```.``` before the property, don't leave it at the end of line
