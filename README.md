@@ -573,3 +573,151 @@ export class MyAwesomeComponent extends React.PureComponent {
     }
 }
 ```
+## Exteranl libraries
+
+### Prefer native methods vs lodash
+
+> Reason: lodash is a great library which contains a lot of useful functions but the modern js has the short identical part of this functionality so some lodash functions are excess alternative.
+
+```javascript
+// BAD
+_.each([1, 2, 3], callback); 
+// GOOD
+[1, 2, 3].forEach(callback); 
+```
+```javascript
+// BAD
+_.filter([1, 2, 3], callback);
+// GOOD
+[1, 2, 3].filter(callback);
+```
+```javascript
+// BAD
+_.compact([1, 2, 3, 0, false, '']);
+// GOOD
+[1, 2, 3, 0, false, ''].filter(Boolean)
+```
+```javascript
+// BAD
+_.map([1, 2, 3], callback);
+// GOOD
+[1, 2, 3].map(callback);
+```
+```javascript
+// BAD
+_.every([1, 2, 3], callback);
+// GOOD
+[1, 2, 3].every(callback);
+```
+```javascript
+// BAD
+_.some([1, 2, 3], callback);
+// GOOD
+[1, 2, 3].some(callback);
+```
+```javascript
+// BAD
+_.reduce([1, 2, 3], callback);
+// GOOD
+[1, 2, 3].reduce(callback);
+```
+```javascript
+// BAD
+_.concat([1, 2, 3], [4, 5, 6]);
+// GOOD
+[1, 2, 3].concat([4, 5, 6]);
+```
+```javascript
+// BAD
+_.indexOf([1, 2, 3], 1);
+// GOOD
+[1, 2, 3].indexOf(1);
+```
+```javascript
+// BAD
+const first = _.first([1, 2, 3]);
+// GOOD
+const [first] = [1, 2, 3];
+```
+```javascript
+// BAD
+_.join([1, 2, 3], '-');
+// GOOD
+[1, 2, 3].join('-');
+```
+```javascript
+// BAD
+_.reverse([1, 2, 3]);
+// GOOD
+[1, 2, 3].reverse();
+```
+```javascript
+// BAD
+_.isArray([1, 2, 3]);
+// GOOD
+Array.isArray([1, 2, 3]);
+```
+```javascript
+// BAD
+_.size([1, 2, 3]);
+// GOOD
+[1, 2, 3].length;
+```
+```javascript
+// BAD
+_.bind(function, this);
+// GOOD
+function.bind(this);
+```
+```javascript
+// BAD
+_.isNaN(value);
+// GOOD
+Number.isNaN(value);
+```
+```javascript
+// BAD
+_.isUndefined(value);
+// GOOD
+value === undefined;
+```
+```javascript
+// BAD
+const foo = _.assign({}, object1, object2);
+// GOOD
+const foo = {
+    ...object1,
+    ...object2,
+};
+```
+```javascript
+// BAD
+const others = _.omit({a: 1, b: 2, c: 3, d: 4}, ['a', 'c']);
+// GOOD
+const {a, c, ...others} = {a: 1, b: 2, c: 3, d: 4};
+```
+```javascript
+// BAD
+_.keys(object);
+// GOOD
+Object.keys(object)
+```
+```javascript
+// BAD
+_.values(object)
+// GOOD
+Object.values(object);
+```
+```javascript
+// BAD
+_.entries(object)
+// GOOD
+Object.entries(object);
+```
+```javascript
+// BAD
+_.trim(' 123 ');
+// GOOD
+' 123 '.trim();
+```
+
