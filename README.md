@@ -8,6 +8,7 @@ React-specific guidelines described at [RingCentral React Style Guide](https://g
 1. [Language statements and features](#language-statements-and-features)
 1. [Spaces and alignments](#spaces-and-alignments)
 1. [Naming](#naming)
+1. [External libraries](#external-libraries)
 
 ## Overview
 
@@ -573,7 +574,7 @@ export class MyAwesomeComponent extends React.PureComponent {
     }
 }
 ```
-## Exteranl libraries
+## External libraries
 
 ### Prefer native js vs lodash
 
