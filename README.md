@@ -700,17 +700,17 @@ const {a, c, ...others} = {a: 1, b: 2, c: 3, d: 4};
 // BAD
 _.keys(object);
 // GOOD
-Object.keys(object)
+Object.keys(object);
 ```
 ```javascript
 // BAD
-_.values(object)
+_.values(object);
 // GOOD
 Object.values(object);
 ```
 ```javascript
 // BAD
-_.entries(object)
+_.entries(object);
 // GOOD
 Object.entries(object);
 ```
