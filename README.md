@@ -282,6 +282,76 @@ if (isCondition) {
 
 ```
 
+### Make the code more flat and plain
+Each indent makes code's reading difficult. Return the result from the function as soon as possible.
+
+```javascript
+// BAD 
+function getUserActions() {
+    if (isActionsAvailable) {
+        if (isUserEnabled) {
+            return [/*some actions for enabled user*/];
+        } else if (isUserDisabled) {
+            return [/*some actions for disabled user*/];
+        } else {
+            return [/*other actions*/];
+        }
+    }
+    return [];
+}
+
+// GOOD
+function getUserActions() {
+    if (!isActionsAvailable) {
+        return [];
+    }
+    if (isUserEnabled) {
+        return [/*some actions for enabled user*/];
+    } 
+    if (isUserDisabled) {
+        return [/*some actions for disabled user*/];
+    }
+    return [/*other actions*/];
+}
+
+
+// BAD 
+class SomePopup extends Component {
+    renderFooter() {
+        if (isFooterAvailable) {
+            return (
+                <Footer 
+                    there="there" 
+                    are="are"
+                    many="many"
+                    properties 
+                    here
+                />
+            );
+        }
+        return null;
+    }
+}
+
+// GOOD
+class SomePopup extends Component {
+    renderFooter() {
+        if (!isFooterAvailable) {
+            return null;
+        }
+        return (
+            <Footer 
+                there="there" 
+                are="are"
+                many="many"
+                properties 
+                here
+            />
+        );
+    }
+}
+```
+
 ### Put all non dynamic imports at the top of file
 
 > Reason: it's improve file navigation
