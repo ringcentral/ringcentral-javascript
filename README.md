@@ -573,3 +573,55 @@ export class MyAwesomeComponent extends React.PureComponent {
     }
 }
 ```
+
+### renderXXX
+
+For better navigation, we recommend to use `render` prefix for any method which returns JSX or component.  
+
+```javascript
+export class MyCompositeComponent {
+    
+    // ...
+    
+    // GOOD
+    renderHeaderToolbar() {
+        return (
+            <HeaderToolbar>
+                <Action name="like">Like</Action>
+                <Action name="pin">Pin</Action>
+                <Action name="share">Share</Action>
+            </HeaderToolbar>
+        );
+    }
+    
+    // GOOD
+    renderImageBlock() {
+        let {url, title, description} = this.props;
+        
+        return (
+            <Block>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <Image src={url} />
+            </Block>
+        );
+    }
+    
+    // BAD - should be renderCommentsList
+    getCommentsList() {
+        let {id} = this.props;
+        
+        return <ResourceCommentsList resourceId={id} />;
+    }
+    
+    render() {
+        return (
+            <div>
+                {this.renderHeaderToolbar()}
+                {this.renderImageBlock()}
+                {this.getCommentsList()}
+            </div>
+        );
+    }
+}
+```

@@ -271,6 +271,7 @@ module.exports = {
                     'static-methods',
                     'lifecycle',
                     'everything-else',
+                    '/^render.+$/',
                     'render'
                 ]
             }
