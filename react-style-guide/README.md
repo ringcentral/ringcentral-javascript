@@ -98,7 +98,7 @@ class Foo extends React.Component {
     
     static propTypes = {
         hasBar: PropTypes.bool.isRequired,
-        message: PropTypes.string.isRequired
+        message: PropTypes.string.isRequired,
     };
 
     getBar() {
@@ -130,7 +130,7 @@ When introduce optional property, make sure it has default value. Otherwise, com
 class Foo extends React.Component {
     static propTypes = {
         hasBar: PropTypes.bool,
-        message: PropTypes.string.isRequired
+        message: PropTypes.string.isRequired,
     };
 
     getBar() {
@@ -156,11 +156,11 @@ class Foo extends React.Component {
 
     static propTypes = {
         hasBar: PropTypes.bool,
-        message: PropTypes.string.isRequired
+        message: PropTypes.string.isRequired,
     };
 
     static defaultProps = {
-        hasBar: true
+        hasBar: true,
     };
 
     getBar() {
