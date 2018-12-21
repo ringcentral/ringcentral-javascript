@@ -225,14 +225,14 @@ For ```this``` binding use following pattern:
 // GOOD
 class Foo extends React.Component {
 
-    handleButtonClick = event => {
+    handleClickButton = event => {
         // 
     };
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={this.handleButtonClick}>
+            <button onClick={this.handleClickButton}>
                 {children}
             </button>
         );
@@ -244,14 +244,14 @@ class Foo extends React.Component {
 // BAD
 class Foo extends React.Component {
 
-    handleButtonClick(event) {
+    handleClickButton(event) {
         // 
     }
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={this.handleButtonClick.bind(this)}>
+            <button onClick={this.handleClickButton.bind(this)}>
                 {children}
             </button>
         );
@@ -261,14 +261,14 @@ class Foo extends React.Component {
 // BAD
 class Foo extends React.Component {
 
-    handleButtonClick(event) {
+    handleClickButton(event) {
         // 
     }
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={::this.handleButtonClick}>
+            <button onClick={::this.handleClickButton}>
                 {children}
             </button>
         );
@@ -283,17 +283,17 @@ class Foo extends React.Component {
         
         // well optimized, but bad for maintenance, 
         // because requires double declaration for each method
-        this.handleButtonClick = ::this.handleButtonClick; 
+        this.handleClickButton = ::this.handleClickButton; 
     }
 
-    handleButtonClick(event) {
+    handleClickButton(event) {
         // 
     }
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={this.handleButtonClick}>
+            <button onClick={this.handleClickButton}>
                 {children}
             </button>
         );
