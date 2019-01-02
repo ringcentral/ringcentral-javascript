@@ -69,7 +69,7 @@ function foo() {
     var bar = null; // work
 }
 
-// GOOD
+// GOOD (to avoid implicit errors)
 function foo() {
     let bar = baz();
     // ...
@@ -83,7 +83,7 @@ function foo() {
     var bar = 'bar'; 
 }
 
-// GOOD
+// GOOD (to avoid implicit errors)
 function foo() {
     baz(bar); // SyntaxError
     // ...
