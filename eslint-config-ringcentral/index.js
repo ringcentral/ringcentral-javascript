@@ -16,7 +16,7 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react'],
+    plugins: ['react', 'import'],
     globals: {
         chai: true,
         expect: true,
@@ -157,6 +157,12 @@ module.exports = {
                 asyncArrow: 'always'
             }
         ],
+
+
+        // import specifics
+
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
+        'no-default-export': 'error',
 
 
         // react specifics
