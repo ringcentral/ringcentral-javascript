@@ -661,6 +661,12 @@ _.reverse([1, 2, 3]);
 ```
 ```javascript
 // BAD
+_.uniq([1, 2, 3, 3, 2]);
+// GOOD
+[...new Set([1, 2, 3, 3, 2])];
+```
+```javascript
+// BAD
 _.isArray([1, 2, 3]);
 // GOOD
 Array.isArray([1, 2, 3]);
@@ -740,4 +746,3 @@ _.trim(' 123 ');
 // GOOD
 ' 123 '.trim();
 ```
-
