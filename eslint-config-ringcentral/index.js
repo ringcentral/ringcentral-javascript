@@ -7,7 +7,7 @@ module.exports = {
         es6: true,
         mocha: true
     },
-    extends: 'eslint:recommended',
+    extends: ['plugin:you-dont-need-lodash-underscore/all', 'eslint:recommended'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaFeatures: {
