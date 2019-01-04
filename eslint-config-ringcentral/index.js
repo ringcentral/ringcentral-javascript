@@ -147,6 +147,9 @@ module.exports = {
         // http://eslint.org/docs/rules/semi
         semi: 'error',
 
+        // https://eslint.org/docs/rules/object-shorthand
+        'object-shorthand': 'error',
+
         // require single space before curly brackets in blocks
         // http://eslint.org/docs/rules/space-before-blocks.html
         'space-before-blocks': ['error', 'always'],

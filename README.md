@@ -410,6 +410,42 @@ with (_) {
 trace(_.sort(bar), _.trim(baz));
 ```
 
+### Use shorthand object properties
+> Reason: it makes code cleaner
+```javascript
+// BAD
+const foo = {
+    a: a,
+    b: b,
+    c: function() {},
+};
+
+// GOOD
+const foo = {
+    a, 
+    b,
+    c() {},
+};
+
+```
+Move shorthand properties up
+```javascript
+// BAD
+const foo = {
+    c: 'bar',
+    a,
+    d: 'baz',
+    b,
+};
+
+// GOOD
+const foo = {
+    a,
+    b,
+    c: 'bar',
+    d: 'baz',
+};
+```
 ### Avoid using nested functions
 
 > Reason: it bad for testing and maintaining. It's always better to make separate, outer-scope free functions and methods instead of mash of inner functions. 
