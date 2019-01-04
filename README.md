@@ -394,7 +394,25 @@ class SomePopup extends Component {
 
 ### Put all non dynamic imports at the top of file
 
-> Reason: it's improve file navigation
+> Reason: it improves a file navigation
+
+### Prefer named export vs default export
+
+> Reason: it saves exported variable names, makes imports, a refactoring and a navigation easier
+
+```javascript
+
+// BAD
+export default class Foo {
+    // ...
+}
+
+// GOD
+export class Foo {
+    // ...
+}
+
+````
 
 ### Do not use ```with``` statement
 
