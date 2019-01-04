@@ -140,6 +140,9 @@ module.exports = {
         // http://eslint.org/docs/rules/no-with
         'no-with': 'error',
 
+        // https://eslint.org/docs/rules/no-unneeded-ternary
+        'no-unneeded-ternary': 'error',
+
         // require one `var` or `let` or 'const` for each variable/const. disallow multiple declarations
         // http://eslint.org/docs/rules/one-var
         'one-var': ['error', 'never'],
