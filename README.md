@@ -580,6 +580,7 @@ export class MyAwesomeComponent extends React.PureComponent {
 
 > Reason: lodash is a great library which contains a lot of useful functions but the modern js has the short identical part of this functionality so some lodash functions are excess alternative.
 
+> Don't forget to check necessary browsers compatibility and turn on polyfills if it's needed.
 ```javascript
 // BAD
 _.each([1, 2, 3], callback); 
@@ -596,7 +597,7 @@ _.filter([1, 2, 3], callback);
 // BAD
 _.compact([1, 2, 3, 0, false, '']);
 // GOOD
-[1, 2, 3, 0, false, ''].filter(Boolean)
+[1, 2, 3, 0, false, ''].filter(Boolean);
 ```
 ```javascript
 // BAD
@@ -618,9 +619,9 @@ _.some([1, 2, 3], callback);
 ```
 ```javascript
 // BAD
-_.reduce([1, 2, 3], callback);
+_.reduce([1, 2, 3], callback, 0);
 // GOOD
-[1, 2, 3].reduce(callback);
+[1, 2, 3].reduce(callback, 0);
 ```
 ```javascript
 // BAD
@@ -672,9 +673,15 @@ _.size([1, 2, 3]);
 ```
 ```javascript
 // BAD
-_.bind(function, this);
+_.isEmpty([]);
 // GOOD
-function.bind(this);
+[].length === 0;
+````
+```javascript
+// BAD
+_.bind(func, this);
+// GOOD
+func.bind(this);
 ```
 ```javascript
 // BAD
@@ -703,6 +710,12 @@ const others = _.omit({a: 1, b: 2, c: 3, d: 4}, ['a', 'c']);
 // GOOD
 const {a, c, ...others} = {a: 1, b: 2, c: 3, d: 4};
 ```
+```javascript
+// BAD
+_.isEmpty(object);
+// GOOD
+Object.keys(object).length === 0;
+````
 ```javascript
 // BAD
 _.keys(object);
