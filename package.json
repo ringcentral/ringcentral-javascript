@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/ringcentral/ringcentral-javascript/issues"
   },
-  "homepage": "https://github.com/ringcentral/ringcentral-javascript"
+  "homepage": "https://github.com/ringcentral/ringcentral-javascript",
+  "devDependencies": {
+    "eslint-plugin-ringcentral": "1.0.3"
+  }
 }
