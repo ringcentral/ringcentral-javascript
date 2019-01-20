@@ -428,6 +428,7 @@ const foo = {
 };
 
 ```
+<a name="move-shorthand-properties-up"></a>
 [#](#move-shorthand-properties-up) Move shorthand properties up 
 ```javascript
 // BAD
