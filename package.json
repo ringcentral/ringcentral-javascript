@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-javascript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RingCentral JavaScript Style Guide",
   "main": "index.js",
   "scripts": {
