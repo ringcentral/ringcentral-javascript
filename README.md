@@ -286,7 +286,7 @@ expect(actualValue, 'should contains foo, bar')
 
 ### Do not use ternary inside ternary - no nested ternary
 
-It's really hard to maintain such code
+> Reason: it's really hard to maintain such code
 
 ```javascript
 // BAD
@@ -298,6 +298,27 @@ if (foo < bar) {
     result = foo;
 } else {
     result = foo > baz ? 'FOO' : baz;
+}
+```
+### Don't use else, if return stops function execution before
+> Reason: it's necessary and makes code cleaner
+```javascript
+// BAD
+const foo = () => {
+    if (isBar) {
+        return 'bar';
+    } else {
+        return 'baz';
+    }
+}
+
+// GOOD
+const foo = () => {
+    if (isBar) {
+        return 'bar';
+    }
+    
+    return 'baz';
 }
 ```
 
@@ -394,7 +415,25 @@ class SomePopup extends Component {
 
 ### Put all non dynamic imports at the top of file
 
-> Reason: it's improve file navigation
+> Reason: it improves a file navigation
+
+### Prefer named export vs default export
+
+> Reason: it saves exported variable names, makes imports, a refactoring and a navigation easier
+
+```javascript
+
+// BAD
+export default class Foo {
+    // ...
+}
+
+// GOD
+export class Foo {
+    // ...
+}
+
+````
 
 ### Do not use ```with``` statement
 
@@ -426,7 +465,7 @@ Do not leave console calls in your code
 
 ### Do not exceed 120 column width
 
-> Reason: It's hard to read and maintain
+> Reason: it's hard to read and maintain
 
 Exception: long links and international strings can exceed that limitation
 

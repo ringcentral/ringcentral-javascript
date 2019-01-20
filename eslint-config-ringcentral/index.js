@@ -16,7 +16,7 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react'],
+    plugins: ['react', 'import'],
     globals: {
         chai: true,
         expect: true,
@@ -143,6 +143,9 @@ module.exports = {
         // https://eslint.org/docs/rules/no-unneeded-ternary
         'no-unneeded-ternary': 'error',
 
+        // https://eslint.org/docs/rules/no-else-return
+        'no-else-return': 'error',
+
         // require one `var` or `let` or 'const` for each variable/const. disallow multiple declarations
         // http://eslint.org/docs/rules/one-var
         'one-var': ['error', 'never'],
@@ -164,6 +167,12 @@ module.exports = {
                 asyncArrow: 'always'
             }
         ],
+
+
+        // import specifics
+
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
+        'no-default-export': 'error',
 
 
         // react specifics
