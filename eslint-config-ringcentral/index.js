@@ -140,6 +140,9 @@ module.exports = {
         // http://eslint.org/docs/rules/no-with
         'no-with': 'error',
 
+        // https://eslint.org/docs/rules/no-unneeded-ternary
+        'no-unneeded-ternary': 'error',
+
         // https://eslint.org/docs/rules/no-else-return
         'no-else-return': 'error',
 
