@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/ringcentral/ringcentral-javascript",
   "devDependencies": {
-    "eslint-plugin-ringcentral": "1.0.3"
+    "eslint-plugin-ringcentral": "1.0.4"
   }
 }
