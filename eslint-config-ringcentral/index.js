@@ -87,6 +87,9 @@ module.exports = {
         // http://eslint.org/docs/rules/no-control-regex
         'no-control-regex': 'error',
 
+        // https://eslint.org/docs/rules/no-else-return
+        'no-else-return': 'error',
+
         // disallow empty block statements
         // http://eslint.org/docs/rules/no-empty
         'no-empty': 'error',
@@ -110,6 +113,9 @@ module.exports = {
         // disallow undeclared variables
         // http://eslint.org/docs/rules/no-undef
         'no-undef': 'error',
+
+        // https://eslint.org/docs/rules/no-unneeded-ternary
+        'no-unneeded-ternary': 'error',
 
         // disallow unused import, disallow unused expressions
         // http://eslint.org/docs/rules/no-unused-expressions
@@ -140,11 +146,8 @@ module.exports = {
         // http://eslint.org/docs/rules/no-with
         'no-with': 'error',
 
-        // https://eslint.org/docs/rules/no-unneeded-ternary
-        'no-unneeded-ternary': 'error',
-
-        // https://eslint.org/docs/rules/no-else-return
-        'no-else-return': 'error',
+        // https://eslint.org/docs/rules/object-shorthand
+        'object-shorthand': 'error',
 
         // require one `var` or `let` or 'const` for each variable/const. disallow multiple declarations
         // http://eslint.org/docs/rules/one-var
