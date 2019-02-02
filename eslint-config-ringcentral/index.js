@@ -16,7 +16,7 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react'],
+    plugins: ['react', 'import'],
     globals: {
         chai: true,
         expect: true,
@@ -87,6 +87,9 @@ module.exports = {
         // http://eslint.org/docs/rules/no-control-regex
         'no-control-regex': 'error',
 
+        // https://eslint.org/docs/rules/no-else-return
+        'no-else-return': 'error',
+
         // disallow empty block statements
         // http://eslint.org/docs/rules/no-empty
         'no-empty': 'error',
@@ -110,6 +113,9 @@ module.exports = {
         // disallow undeclared variables
         // http://eslint.org/docs/rules/no-undef
         'no-undef': 'error',
+
+        // https://eslint.org/docs/rules/no-unneeded-ternary
+        'no-unneeded-ternary': 'error',
 
         // disallow unused import, disallow unused expressions
         // http://eslint.org/docs/rules/no-unused-expressions
@@ -164,6 +170,12 @@ module.exports = {
                 asyncArrow: 'always'
             }
         ],
+
+
+        // import specifics
+
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
+        'no-default-export': 'error',
 
 
         // react specifics
