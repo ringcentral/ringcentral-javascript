@@ -16,7 +16,7 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react'],
+    plugins: ['react', 'import'],
     globals: {
         chai: true,
         expect: true,
@@ -30,6 +30,10 @@ module.exports = {
         // line breaks before braces
         // http://eslint.org/docs/rules/brace-style
         'brace-style': ['error', '1tbs'],
+
+        // require a trailing comma for multiline arrays/objects
+        // https://eslint.org/docs/rules/comma-dangle
+        'comma-dangle': ['error', 'always-multiline'],
 
         // require brackets for all statements
         // http://eslint.org/docs/rules/curly
@@ -136,6 +140,12 @@ module.exports = {
         // http://eslint.org/docs/rules/no-with
         'no-with': 'error',
 
+        // https://eslint.org/docs/rules/no-unneeded-ternary
+        'no-unneeded-ternary': 'error',
+
+        // https://eslint.org/docs/rules/no-else-return
+        'no-else-return': 'error',
+
         // require one `var` or `let` or 'const` for each variable/const. disallow multiple declarations
         // http://eslint.org/docs/rules/one-var
         'one-var': ['error', 'never'],
@@ -157,6 +167,12 @@ module.exports = {
                 asyncArrow: 'always'
             }
         ],
+
+
+        // import specifics
+
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
+        'no-default-export': 'error',
 
 
         // react specifics
@@ -271,6 +287,7 @@ module.exports = {
                     'static-methods',
                     'lifecycle',
                     'everything-else',
+                    '/^render.+$/',
                     'render'
                 ]
             }

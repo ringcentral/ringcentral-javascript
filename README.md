@@ -91,6 +91,46 @@ function foo() {
 }
 ```
 
+### Use trailing comma
+
+For multi-line structures, the trailing comma is required. For oneline definitions it should not be used.
+
+> Reason: it helps to make history and code review cleaner. It allows to move/remove the last element without changing a previous line.
+
+```javascript
+// BAD
+let foo = {bar: 1, baz: 5,};
+let bar = ['bar', 'baz',];
+
+// GOOD
+let foo = {bar: 1, baz: 5};
+let bar = ['bar', 'baz'];
+
+// BAD
+let foo = {
+    bar: 1,
+    baz: 5,
+    qux: 8
+};
+let bar = [
+    'bar',
+    'baz',
+    'qux'
+];
+
+// GOOD
+let foo = {
+    bar: 1,
+    baz: 5,
+    qux: 8,
+};
+let bar = [
+    'bar',
+    'baz',
+    'qux',
+];
+```
+
 ### Use separate ```const``` / ```let``` declaration per variable
 
 > Reason: it allows to avoid bugs with global scope variables (caused by misprinted comma). It's easier to maintain. It makes diffs more clear.
@@ -211,7 +251,7 @@ expect(actualValue, 'should contains foo, bar')
 
 ### Do not use ternary inside ternary - no nested ternary
 
-It's really hard to maintain such code
+> Reason: it's really hard to maintain such code
 
 ```javascript
 // BAD
@@ -223,6 +263,27 @@ if (foo < bar) {
     result = foo;
 } else {
     result = foo > baz ? 'FOO' : baz;
+}
+```
+### Don't use else, if return stops function execution before
+> Reason: it's necessary and makes code cleaner
+```javascript
+// BAD
+const foo = () => {
+    if (isBar) {
+        return 'bar';
+    } else {
+        return 'baz';
+    }
+}
+
+// GOOD
+const foo = () => {
+    if (isBar) {
+        return 'bar';
+    }
+    
+    return 'baz';
 }
 ```
 
@@ -247,9 +308,97 @@ if (isCondition) {
 
 ```
 
+### Make the code more flat and plain
+Each indent makes code's reading difficult. Return the result from the function as soon as possible.
+
+```javascript
+// BAD 
+function getUserActions() {
+    if (isActionsAvailable) {
+        if (isUserEnabled) {
+            return [/*some actions for enabled user*/];
+        } else if (isUserDisabled) {
+            return [/*some actions for disabled user*/];
+        } else {
+            return [/*other actions*/];
+        }
+    }
+    return [];
+}
+
+// GOOD
+function getUserActions() {
+    if (!isActionsAvailable) {
+        return [];
+    }
+    if (isUserEnabled) {
+        return [/*some actions for enabled user*/];
+    } 
+    if (isUserDisabled) {
+        return [/*some actions for disabled user*/];
+    }
+    return [/*other actions*/];
+}
+
+
+// BAD 
+class SomePopup extends Component {
+    renderFooter() {
+        if (isFooterAvailable) {
+            return (
+                <Footer 
+                    there="there" 
+                    are="are"
+                    many="many"
+                    properties 
+                    here
+                />
+            );
+        }
+        return null;
+    }
+}
+
+// GOOD
+class SomePopup extends Component {
+    renderFooter() {
+        if (!isFooterAvailable) {
+            return null;
+        }
+        return (
+            <Footer 
+                there="there" 
+                are="are"
+                many="many"
+                properties 
+                here
+            />
+        );
+    }
+}
+```
+
 ### Put all non dynamic imports at the top of file
 
-> Reason: it's improve file navigation
+> Reason: it improves a file navigation
+
+### Prefer named export vs default export
+
+> Reason: it saves exported variable names, makes imports, a refactoring and a navigation easier
+
+```javascript
+
+// BAD
+export default class Foo {
+    // ...
+}
+
+// GOD
+export class Foo {
+    // ...
+}
+
+````
 
 ### Do not use ```with``` statement
 
@@ -281,7 +430,7 @@ Do not leave console calls in your code
 
 ### Do not exceed 120 column width
 
-> Reason: It's hard to read and maintain
+> Reason: it's hard to read and maintain
 
 Exception: long links and international strings can exceed that limitation
 
@@ -294,14 +443,14 @@ Exception: long links and international strings can exceed that limitation
 let foo = {
     first:          'foo',
     second:         'bar',
-    thisOneIsLong:  'baz'
+    thisOneIsLong:  'baz',
 };
 
 // GOOD
 let foo = {
     first: 'foo',
     second: 'bar',
-    thisOneIsLong: 'baz'
+    thisOneIsLong: 'baz',
 };
 ```
 
@@ -534,6 +683,58 @@ export class MyAwesomeComponent extends React.PureComponent {
                 <Button onClick={this.handleClickPrevButton}Prev</Button>
                 <Button onClick={this.handleClickNextButton}>Next</Button>
             </Panel>
+        );
+    }
+}
+```
+
+### renderXXX
+
+For better navigation, we recommend to use `render` prefix for any method which returns JSX or component.  
+
+```javascript
+export class MyCompositeComponent {
+    
+    // ...
+    
+    // GOOD
+    renderHeaderToolbar() {
+        return (
+            <HeaderToolbar>
+                <Action name="like">Like</Action>
+                <Action name="pin">Pin</Action>
+                <Action name="share">Share</Action>
+            </HeaderToolbar>
+        );
+    }
+    
+    // GOOD
+    renderImageBlock() {
+        let {url, title, description} = this.props;
+        
+        return (
+            <Block>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <Image src={url} />
+            </Block>
+        );
+    }
+    
+    // BAD - should be renderCommentsList
+    getCommentsList() {
+        let {id} = this.props;
+        
+        return <ResourceCommentsList resourceId={id} />;
+    }
+    
+    render() {
+        return (
+            <div>
+                {this.renderHeaderToolbar()}
+                {this.renderImageBlock()}
+                {this.getCommentsList()}
+            </div>
         );
     }
 }
