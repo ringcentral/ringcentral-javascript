@@ -440,7 +440,7 @@ Do not leave console calls in your code
 
 > Reason: it just a noise for other developers. We always can find anything using history of version control system.
 
-### Specify (`TODO` | `FIXME`) comment with JIRA (or another bug tracking system) task id or username
+### Specify `TODO` | `FIXME` comment with task id or username
 
 > Reason: to not keep not evident and forgotten comments please specify a comment with a task id which is connected with a problem. If it's a light problem and you are going to solve it soon you can provide just your username. 
 
