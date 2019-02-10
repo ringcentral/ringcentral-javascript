@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-javascript",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "RingCentral JavaScript Style Guide",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,5 @@
   "bugs": {
     "url": "https://github.com/ringcentral/ringcentral-javascript/issues"
   },
-  "homepage": "https://github.com/ringcentral/ringcentral-javascript",
-  "devDependencies": {
-    "eslint-plugin-ringcentral": "1.0.4"
-  }
+  "homepage": "https://github.com/ringcentral/ringcentral-javascript"
 }
