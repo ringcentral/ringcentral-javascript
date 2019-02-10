@@ -461,6 +461,12 @@ class UserService {
     getAllUsers() {
        // TODO (trump.wang) implement when backend is ready
     }
+    
+    // GOOD (to add FIXME if you see some problem code)
+    badMethod() {
+        // FIXME [UIA-12345] rewrite this to a better structure
+        // ...bad code
+    }
 }
 
 ```
