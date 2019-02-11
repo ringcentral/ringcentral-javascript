@@ -7,7 +7,6 @@ module.exports = {
         es6: true,
         mocha: true
     },
-    extends: 'eslint:recommended',
     parser: 'babel-eslint',
     parserOptions: {
         ecmaFeatures: {
@@ -16,7 +15,8 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react', 'import'],
+    plugins: ['react', 'import', 'ringcentral'],
+    extends: ['eslint:recommended', 'plugin:ringcentral/all'],
     globals: {
         chai: true,
         expect: true,
