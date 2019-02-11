@@ -445,6 +445,7 @@ Do not leave console calls in your code
 > Reason: to not keep not evident and forgotten comments please specify a comment with a task id which is connected with a problem. If it's a light problem and you are going to solve it soon you can provide just your username. 
 <details>
   <summary>Read more</summary>
+  ---
   TODO is a useful tool for developers.
   There are a few cases when TODO comments could be added:
   
@@ -454,6 +455,7 @@ Do not leave console calls in your code
   
   **Do not leave anonymous TODO without the id**. Usually, anonymous TODO's live too long while it not linked to the issue tracking system.
   Signed TODO's increases the factor of responsibility. When the developer signs TODO it like a short-term note for the author. But, it also a flag that author is responsible to resolve it ASAP. Finally, it makes such part of code clear for reviewers.
+  ---
 </details>
 
 ```javascript
