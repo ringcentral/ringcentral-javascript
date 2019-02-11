@@ -443,7 +443,18 @@ Do not leave console calls in your code
 ### Specify `TODO` | `FIXME` comment with task id or username
 
 > Reason: to not keep not evident and forgotten comments please specify a comment with a task id which is connected with a problem. If it's a light problem and you are going to solve it soon you can provide just your username. 
-
+<details>
+  <summary>Read more</summary>
+  TODO is a useful tool for developers.
+  There are a few cases when TODO comments could be added:
+  
+  * the developer is working on the task, and he noticed that part of his work is temporarily blocked (say, his particular task depends on API that not yet ready)
+  * the developer is working on the task and noticed that he would like to make one/few little improvements later in the scope of this task. However, the task is already done and could be sent for code-review to the boost a process.
+  * the developer detects some issue in the code and unable to fix it in the scope of his task, but he would like to improve the situation.
+  
+  **Do not leave anonymous TODO without the id**. Usually, anonymous TODO's live too long while it not linked to the issue tracking system.
+  Signed TODO's increases the factor of responsibility. When the developer signs TODO it like a short-term note for the author. But, it also a flag that author is responsible to resolve it ASAP. Finally, it makes such part of code clear for reviewers.
+</details>
 ```javascript
 
 class UserService {
@@ -500,10 +511,6 @@ let foo = {
 ```
 
 ### Set one space before function body curly bracket ```{```, do not set space after function name
-<details>
-  <summary>Click to expand</summary>
-  whatever
-</details>
 ```javascript
 // BAD
 function isFooBar () {
