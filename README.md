@@ -500,7 +500,10 @@ let foo = {
 ```
 
 ### Set one space before function body curly bracket ```{```, do not set space after function name
-
+<details>
+  <summary>Click to expand</summary>
+  whatever
+</details>
 ```javascript
 // BAD
 function isFooBar () {
