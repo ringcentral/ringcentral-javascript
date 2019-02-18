@@ -175,7 +175,7 @@ module.exports = {
         // import specifics
 
         // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
-        'no-default-export': 'error',
+        'import/no-default-export': 'error',
 
 
         // react specifics
