@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-ringcentral",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "ESLint config for the RingCentral style guide",
   "main": "index.js",
   "scripts": {
@@ -28,13 +28,13 @@
   "homepage": "https://github.com/ringcentral/ringcentral-javascript",
   "devDependencies": {
     "eslint": ">=4.1.1",
-    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-ringcentral": "~1.0.5"
   },
   "peerDependencies": {
     "eslint": ">=4.1.1",
-    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-ringcentral": "~1.0.5"
   }
