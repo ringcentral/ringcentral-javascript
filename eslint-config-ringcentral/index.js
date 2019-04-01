@@ -7,7 +7,7 @@ module.exports = {
         es6: true,
         mocha: true
     },
-    extends: ['plugin:you-dont-need-lodash-underscore/all', 'eslint:recommended'],
+    extends: ['eslint:recommended', 'plugin:you-dont-need-lodash-underscore/all'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaFeatures: {
@@ -16,7 +16,7 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react'],
+    plugins: ['react', 'you-dont-need-lodash-underscore'],
     globals: {
         chai: true,
         expect: true,

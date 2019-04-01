@@ -703,6 +703,12 @@ value === undefined;
 ```
 ```javascript
 // BAD
+_.isEmpty(object);
+// GOOD
+Object.keys(object).length === 0;
+```
+```javascript
+// BAD
 const foo = _.assign({}, object1, object2);
 // GOOD
 const foo = {
