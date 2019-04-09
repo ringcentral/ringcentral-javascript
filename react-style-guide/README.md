@@ -76,11 +76,11 @@ class MyAwesomeComponent extends React.Component {
 class Foo extends React.Component {
     
     getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+        if (!this.props.hasBar) {
             return null;
         }
+        
+        return <Bar />;
     }
 
     render() {
@@ -101,12 +101,12 @@ class Foo extends React.Component {
         message: PropTypes.string.isRequired,
     };
 
-    getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+   getBar() {
+        if (!this.props.hasBar) {
             return null;
         }
+        
+        return <Bar />;
     }
 
     render() {
@@ -433,11 +433,11 @@ render() {
 
 // GOOD
 getFoo() {
-    if (isCondition()) {
-        return <Foo />;
-    } else {
+    if (!isCondition()) {
         return null;
     }
+    
+    return <Foo />;
 }
 
 render() {
