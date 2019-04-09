@@ -134,11 +134,11 @@ class Foo extends React.Component {
     };
 
     getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+        if (!this.props.hasBar) {
             return null;
-        }
+        } 
+        
+        return <Bar />;
     }
 
     render() {
@@ -164,11 +164,11 @@ class Foo extends React.Component {
     };
 
     getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+       if (!this.props.hasBar) {
             return null;
-        }
+        } 
+        
+        return <Bar />;
     }
 
     render() {
