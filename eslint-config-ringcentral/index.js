@@ -15,8 +15,8 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react', 'import', 'ringcentral'],
-    extends: ['eslint:recommended', 'plugin:ringcentral/all'],
+    plugins: ['react', 'import', 'ringcentral', 'you-dont-need-lodash-underscore'],
+    extends: ['eslint:recommended', 'plugin:ringcentral/all', 'plugin:you-dont-need-lodash-underscore/all-warn'],
     globals: {
         chai: true,
         expect: true,
