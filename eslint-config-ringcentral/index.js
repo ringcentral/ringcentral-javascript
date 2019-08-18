@@ -29,15 +29,15 @@ module.exports = {
 
         // line breaks before braces
         // http://eslint.org/docs/rules/brace-style
-        'brace-style': ['error', '1tbs'],
+        'brace-style': ['warn', '1tbs'],
 
         // require a trailing comma for multiline arrays/objects
         // https://eslint.org/docs/rules/comma-dangle
-        'comma-dangle': ['error', 'always-multiline'],
+        'comma-dangle': ['warn', 'always-multiline'],
 
         // require brackets for all statements
         // http://eslint.org/docs/rules/curly
-        curly: ['error', 'all'],
+        curly: ['warn', 'all'],
 
         // require leading dot vs dot at the end of statement
         // http://eslint.org/docs/rules/dot-location
@@ -50,7 +50,7 @@ module.exports = {
         // require single space around keywords
         // http://eslint.org/docs/rules/keyword-spacing.html
         'keyword-spacing': [
-            'error',
+            'warn',
             {
                 before: true,
                 after: true,
@@ -73,7 +73,7 @@ module.exports = {
         ],
 
         // http://eslint.org/docs/rules/no-case-declarations
-        'no-case-declarations': 'off',
+        'no-case-declarations': 'warn',
 
         // disallow re-assign variables or props inside 'if', 'while' conditions, etc.
         // http://eslint.org/docs/rules/no-cond-assign
@@ -81,14 +81,14 @@ module.exports = {
 
         // disallow console output
         // http://eslint.org/docs/rules/no-console
-        'no-console': 'error',
+        'no-console': 'warn',
 
         // disallow special or invisible characters usage for regexp
         // http://eslint.org/docs/rules/no-control-regex
         'no-control-regex': 'error',
 
         // https://eslint.org/docs/rules/no-else-return
-        'no-else-return': 'error',
+        'no-else-return': 'warn',
 
         // disallow empty block statements
         // http://eslint.org/docs/rules/no-empty
@@ -100,7 +100,7 @@ module.exports = {
 
         // disallow redundant boolean type cast
         // http://eslint.org/docs/rules/no-extra-boolean-cast
-        'no-extra-boolean-cast': 'off',
+        'no-extra-boolean-cast': 'warn',
 
         // disallow function definition inside block, disallow using 'var' inside block
         // http://eslint.org/docs/rules/no-inner-declarations
@@ -147,23 +147,23 @@ module.exports = {
         'no-with': 'error',
 
         // https://eslint.org/docs/rules/object-shorthand
-        'object-shorthand': 'error',
+        'object-shorthand': 'warn',
 
         // require one `var` or `let` or 'const` for each variable/const. disallow multiple declarations
         // http://eslint.org/docs/rules/one-var
         'one-var': ['error', 'never'],
 
         // http://eslint.org/docs/rules/semi
-        semi: 'error',
+        semi: 'warn',
 
         // require single space before curly brackets in blocks
         // http://eslint.org/docs/rules/space-before-blocks.html
-        'space-before-blocks': ['error', 'always'],
+        'space-before-blocks': ['warn', 'always'],
 
         // normalize space near function
         // http://eslint.org/docs/rules/space-before-function-paren
         'space-before-function-paren': [
-            'error',
+            'warn',
             {
                 anonymous: 'never',
                 named: 'never',
@@ -184,7 +184,7 @@ module.exports = {
         // require closing bracket to be placed at the same line - affect single-line components
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md
         'react/jsx-closing-bracket-location': [
-            'error',
+            'warn',
             {
                 selfClosing: 'tag-aligned',
                 nonEmpty: 'after-props'
@@ -193,23 +193,23 @@ module.exports = {
 
         // ensure closing tag indent consistency on multi-line non self-closing components
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-tag-location.md
-        'react/jsx-closing-tag-location': 'error',
+        'react/jsx-closing-tag-location': 'warn',
 
         // ensure JSX props space consistency
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-equals-spacing.md
-        'react/jsx-equals-spacing': ['error', 'never'],
+        'react/jsx-equals-spacing': ['warn', 'never'],
 
         // ensure consistent properties indent for multi-line components
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-first-prop-new-line.md
-        'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
+        'react/jsx-first-prop-new-line': ['warn', 'multiline-multiprop'],
 
         // ensure consistent JSX tags indent
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-indent.md
-        'react/jsx-indent': 'error',
+        'react/jsx-indent': 'warn',
 
         // ensure consistent properties indent
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-indent-props.md
-        'react/jsx-indent-props': 'error',
+        'react/jsx-indent-props': 'warn',
 
         // require key for components inside arrays
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-key.md
@@ -218,7 +218,7 @@ module.exports = {
         // disallow more that 1 property per line for multi-line components
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-max-props-per-line.md
         'react/jsx-max-props-per-line': [
-            'error',
+            'warn',
             {
                 maximum: 1,
                 when: 'multiline'
@@ -235,7 +235,7 @@ module.exports = {
 
         // ensure consistent spacing of tag opening and closing brackets
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md
-        'react/jsx-tag-spacing': ['error', {
+        'react/jsx-tag-spacing': ['warn', {
             closingSlash: 'never',
             beforeSelfClosing: 'always',
             afterOpening: 'never'
@@ -257,7 +257,7 @@ module.exports = {
         // require parentheses around JSX markup
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md
         'react/jsx-wrap-multilines': [
-            'error',
+            'warn',
             {
                 declaration: true,
                 assignment: true,
