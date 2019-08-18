@@ -2,6 +2,12 @@
 
 ## React specific
 
+### Prefer composition vs inheritance
+
+> Reason: Inheritance increases the complexity of the component. With inheritance, the code of particular component shared between different classes/layers and files, that negatively affects navigation too. Eventually, polymorphism is a powerful mechanism, but can negatively affect an understanding and maintaining of the component. Unlike inheritance, the composition makes a component structure "flat". Component properties and the ability to combine multiple components together is enough for most cases and provide a lot of flexibility.
+
+Please read [this article](https://reactjs.org/docs/composition-vs-inheritance.html) for better understanding.
+
 ### Avoid to put multiple components in a single file
 
 Even it's looks so small, just don't do it.
@@ -70,11 +76,11 @@ class MyAwesomeComponent extends React.Component {
 class Foo extends React.Component {
     
     getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+        if (!this.props.hasBar) {
             return null;
         }
+        
+        return <Bar />;
     }
 
     render() {
@@ -92,15 +98,15 @@ class Foo extends React.Component {
     
     static propTypes = {
         hasBar: PropTypes.bool.isRequired,
-        message: PropTypes.string.isRequired
+        message: PropTypes.string.isRequired,
     };
 
-    getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+   getBar() {
+        if (!this.props.hasBar) {
             return null;
         }
+        
+        return <Bar />;
     }
 
     render() {
@@ -124,15 +130,15 @@ When introduce optional property, make sure it has default value. Otherwise, com
 class Foo extends React.Component {
     static propTypes = {
         hasBar: PropTypes.bool,
-        message: PropTypes.string.isRequired
+        message: PropTypes.string.isRequired,
     };
 
     getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+        if (!this.props.hasBar) {
             return null;
-        }
+        } 
+        
+        return <Bar />;
     }
 
     render() {
@@ -150,19 +156,19 @@ class Foo extends React.Component {
 
     static propTypes = {
         hasBar: PropTypes.bool,
-        message: PropTypes.string.isRequired
+        message: PropTypes.string.isRequired,
     };
 
     static defaultProps = {
-        hasBar: true
+        hasBar: true,
     };
 
     getBar() {
-        if (this.props.hasBar) {
-            return <Bar />;
-        } else {
+       if (!this.props.hasBar) {
             return null;
-        }
+        } 
+        
+        return <Bar />;
     }
 
     render() {
@@ -225,14 +231,14 @@ For ```this``` binding use following pattern:
 // GOOD
 class Foo extends React.Component {
 
-    handleButtonClick = event => {
+    handleClickButton = event => {
         // 
     };
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={this.handleButtonClick}>
+            <button onClick={this.handleClickButton}>
                 {children}
             </button>
         );
@@ -244,14 +250,14 @@ class Foo extends React.Component {
 // BAD
 class Foo extends React.Component {
 
-    handleButtonClick(event) {
+    handleClickButton(event) {
         // 
     }
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={this.handleButtonClick.bind(this)}>
+            <button onClick={this.handleClickButton.bind(this)}>
                 {children}
             </button>
         );
@@ -261,14 +267,14 @@ class Foo extends React.Component {
 // BAD
 class Foo extends React.Component {
 
-    handleButtonClick(event) {
+    handleClickButton(event) {
         // 
     }
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={::this.handleButtonClick}>
+            <button onClick={::this.handleClickButton}>
                 {children}
             </button>
         );
@@ -283,17 +289,17 @@ class Foo extends React.Component {
         
         // well optimized, but bad for maintenance, 
         // because requires double declaration for each method
-        this.handleButtonClick = ::this.handleButtonClick; 
+        this.handleClickButton = ::this.handleClickButton; 
     }
 
-    handleButtonClick(event) {
+    handleClickButton(event) {
         // 
     }
     
     render() {
         const {children} = this.props;
         return (
-            <button onClick={this.handleButtonClick}>
+            <button onClick={this.handleClickButton}>
                 {children}
             </button>
         );
@@ -427,11 +433,11 @@ render() {
 
 // GOOD
 getFoo() {
-    if (isCondition()) {
-        return <Foo />;
-    } else {
+    if (!isCondition()) {
         return null;
     }
+    
+    return <Foo />;
 }
 
 render() {

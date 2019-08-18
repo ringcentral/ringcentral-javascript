@@ -7,7 +7,6 @@ module.exports = {
         es6: true,
         mocha: true
     },
-    extends: ['eslint:recommended', 'plugin:you-dont-need-lodash-underscore/all'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaFeatures: {
@@ -16,7 +15,8 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react', 'you-dont-need-lodash-underscore'],
+    plugins: ['react', 'import', 'ringcentral', 'you-dont-need-lodash-underscore'],
+    extends: ['eslint:recommended', 'plugin:ringcentral/all', 'plugin:you-dont-need-lodash-underscore/all'],
     globals: {
         chai: true,
         expect: true,
@@ -30,6 +30,10 @@ module.exports = {
         // line breaks before braces
         // http://eslint.org/docs/rules/brace-style
         'brace-style': ['error', '1tbs'],
+
+        // require a trailing comma for multiline arrays/objects
+        // https://eslint.org/docs/rules/comma-dangle
+        'comma-dangle': ['error', 'always-multiline'],
 
         // require brackets for all statements
         // http://eslint.org/docs/rules/curly
@@ -83,6 +87,9 @@ module.exports = {
         // http://eslint.org/docs/rules/no-control-regex
         'no-control-regex': 'error',
 
+        // https://eslint.org/docs/rules/no-else-return
+        'no-else-return': 'error',
+
         // disallow empty block statements
         // http://eslint.org/docs/rules/no-empty
         'no-empty': 'error',
@@ -106,6 +113,9 @@ module.exports = {
         // disallow undeclared variables
         // http://eslint.org/docs/rules/no-undef
         'no-undef': 'error',
+
+        // https://eslint.org/docs/rules/no-unneeded-ternary
+        'no-unneeded-ternary': 'error',
 
         // disallow unused import, disallow unused expressions
         // http://eslint.org/docs/rules/no-unused-expressions
@@ -136,6 +146,9 @@ module.exports = {
         // http://eslint.org/docs/rules/no-with
         'no-with': 'error',
 
+        // https://eslint.org/docs/rules/object-shorthand
+        'object-shorthand': 'error',
+
         // require one `var` or `let` or 'const` for each variable/const. disallow multiple declarations
         // http://eslint.org/docs/rules/one-var
         'one-var': ['error', 'never'],
@@ -157,6 +170,12 @@ module.exports = {
                 asyncArrow: 'always'
             }
         ],
+
+
+        // import specifics
+
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
+        'import/no-default-export': 'error',
 
 
         // react specifics
@@ -271,6 +290,7 @@ module.exports = {
                     'static-methods',
                     'lifecycle',
                     'everything-else',
+                    '/^render.+$/',
                     'render'
                 ]
             }
