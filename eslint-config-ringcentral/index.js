@@ -15,8 +15,8 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: ['react', 'import', 'ringcentral'],
-    extends: ['eslint:recommended', 'plugin:ringcentral/all'],
+    plugins: ['react', 'import', 'ringcentral', 'sonarjs'],
+    extends: ['eslint:recommended', 'plugin:ringcentral/all', 'plugin:sonarjs/recommended'],
     globals: {
         chai: true,
         expect: true,
@@ -298,7 +298,30 @@ module.exports = {
 
         // disallow children for self-closing HTML elements like <br />
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/void-dom-elements-no-children.md
-        'react/void-dom-elements-no-children': 'error'
+        'react/void-dom-elements-no-children': 'error',
 
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/cognitive-complexity.md
+        'sonarjs/cognitive-complexity': 'warn',
+        
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-identical-functions.md
+        'sonarjs/no-identical-functions': 'warn',
+
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-extra-arguments.md
+        'sonarjs/no-extra-arguments': 'warn',
+
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/prefer-object-literal.md
+        'sonarjs/prefer-object-literal': 'warn',
+
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-redundant-boolean.md
+        'sonarjs/no-redundant-boolean': 'warn',
+
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-collapsible-if.md
+        'sonarjs/no-collapsible-if': 'warn',
+
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-duplicate-string.md
+        'sonarjs/no-duplicate-string': 'off',
+
+        // https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-small-switch.md
+        'sonarjs/no-small-switch': 'off'
     }
 };
