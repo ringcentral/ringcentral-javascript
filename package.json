@@ -1,26 +1,28 @@
 {
   "name": "ringcentral-javascript",
   "version": "1.0.0",
+  "private": true,
   "description": "RingCentral JavaScript Style Guide",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "lerna run test --stream --concurrency=1",
+    "publish:release": "lerna publish --tag-version-prefix=\"\" --force-publish=* --no-push --no-git-tag-version"
+  },
+  "dependencies": {
+    "lerna": "3.19.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ringcentral/ringcentral-javascript.git"
   },
-  "keywords": [
-    "JavaScript",
-    "style guide",
-    "RingCentral",
-    "coding convention",
-    "config"
-  ],
-  "author": "RingCentral developers",
+  "author": "RingCentral Developers",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ringcentral/ringcentral-javascript/issues"
   },
-  "homepage": "https://github.com/ringcentral/ringcentral-javascript"
+  "homepage": "https://github.com/ringcentral/ringcentral-javascript",
+  "workspaces": [
+    "eslint-config-ringcentral",
+    "eslint-config-ringcentral-typescript",
+    "eslint-plugin-ringcentral"
+  ]
 }

@@ -1,0 +1,45 @@
+{
+  "name": "eslint-config-ringcentral-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "yarn lint 'src/**/*.{js*,ts*}'",
+    "lint": "eslint --cache --cache-location node_modules/.cache/eslint --fix --quiet"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
+    "babel-eslint": "^10.0.3",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-react-app": "^5.1.0",
+    "eslint-config-ringcentral": "^1.0.0",
+    "eslint-plugin-flowtype": "^4.5.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-ringcentral": "^1.0.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "prettier": "^1.19.1"
+  },
+  "peerDependencies": {
+    "eslint": ">=6"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "react": "^16.12.0",
+    "typescript": "^3.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ringcentral/ringcentral-typescript.git"
+  },
+  "author": "Kirill Konshin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ringcentral/ringcentral-typescript/issues"
+  },
+  "homepage": "https://github.com/ringcentral/ringcentral-typescript#readme"
+}
