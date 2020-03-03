@@ -12,7 +12,7 @@ before_install:
 
 deploy:
 - provider: script
-  script: yarn publish:release --canary --preid=$TRAVIS_BRANCH.$TRAVIS_JOB_NUMBER --dist-tag=$TRAVIS_BRANCH --yes
+  script: yarn publish:release 0.0.0-$TRAVIS_BRANCH.$TRAVIS_JOB_NUMBER --dist-tag=$TRAVIS_BRANCH --yes
   skip_cleanup: true
   on:
     branch: master
