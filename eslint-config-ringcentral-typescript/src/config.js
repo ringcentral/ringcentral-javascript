@@ -15,6 +15,7 @@ module.exports = {
         'plugin:import/typescript',
     ],
     rules: {
+        'curly': 'error',
         'prettier/prettier': [
             'error',
             {
