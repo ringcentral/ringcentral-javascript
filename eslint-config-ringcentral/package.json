@@ -27,16 +27,16 @@
   },
   "homepage": "https://github.com/ringcentral/ringcentral-javascript",
   "devDependencies": {
-    "eslint": ">=4.1.1",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-react": "^7.17.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-ringcentral": "^1.0.0",
     "eslint-plugin-sonarjs": "^0.5.0"
   },
   "peerDependencies": {
-    "eslint": ">=4.1.1",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-react": "^7.17.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-ringcentral": "*",
     "eslint-plugin-sonarjs": "^0.5.0"
   }
