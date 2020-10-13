@@ -26,7 +26,10 @@ module.exports = {
                 trailingComma: 'all',
             },
         ],
+        'no-shadow': 'off',
+        '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/indent': 'off', // prettier takes care of it
+        '@typescript/eslint/no-shadow': 'error',
     },
     env: {
         browser: true,
