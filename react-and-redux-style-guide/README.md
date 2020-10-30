@@ -4,9 +4,9 @@
 
 This is a set of recommended patterns and best practices for writing applications using React+Redux.
 
-##1. Put all Redux codes in `redux` directory inside your module 
+## 1. Put all Redux codes in `redux` directory inside your module 
 > Reason: this helps to keep module isolated
-##2. Use selectors to get data from the Redux state
+## 2. Use selectors to get data from the Redux state
 > Reason: selectors allow hiding data structure and manipulation logic from a component. A selector is not recomputed unless one of its arguments changes.
 ```typescript
 //Good
@@ -32,8 +32,8 @@ const mapStateToProps = ({exampleStore, oneMoreStore}) => ({
     someProp: oneMoreStore.someProp
 });
 ```
-##3. Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
-##4. Use string constants instead of inline strings for action types
+## 3. Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
+## 4. Use string constants instead of inline strings for action types
 > Reason: It helps keep the naming consistent and allows to gather all action types in one place
 ```typescript
 //Good
@@ -45,7 +45,7 @@ createAction(UPDATE_ACTIVE_ITEM_SETTINGS, {nextSettings})
 //Bad
 createAction('update_active_policies_item_settings', {nextSettings})
 ```
-##5. Keep reducers clean by moving logic to helpers
+## 5. Keep reducers clean by moving logic to helpers
 > Reason: a lot of logic inside the reducer complicates an understanding of data changes produced by the action
 ```typescript
 //Good
@@ -87,7 +87,7 @@ export const someReducer: Reducer<SomeStore> = (state: SomeStore = initialState,
     }
 };
 ``` 
-##6. Put Redux connection logic to Containers
+## 6. Put Redux connection logic to Containers
 > Reason: this makes the connection between a React component and Redux storage more transparent and isolated.
 ```typescript
 //Example
@@ -110,7 +110,7 @@ export const FilterContainer: React.FC<{}> = connect(
 )(Filter);
 
 ```
-##7. Add typings for actions
+## 7. Add typings for actions
 ```typescript
 //Example
 // /redux/types/typesOfActions.ts
@@ -134,7 +134,7 @@ export const someReducer: Reducer<Store> = (
     action: ActionTypes,
 ) => { ... };
 ```
-##8. Minimize the use of "blind spreads/returns" 
+## 8. Minimize the use of "blind spreads/returns" 
 > Reason: this improves readability of a reducer
 ```typescript
 //Good
@@ -161,7 +161,7 @@ export const someReducer: Reducer<Store> = (
     }
 ...  
 ``` 
-##9. Always write unit tests for reducers
+## 9. Always write unit tests for reducers
 > Reason: a reducer is one of the most sensitive places of the redux code, a modification can have a lot of impact on the application. On the other hand, this code is relatively easy to test, so writing unit tests is a convenient way to be sure the reducer works as expected, and some changes don't affect it. 
 ```typescript
 //Example
@@ -176,13 +176,13 @@ const ROLES: SomeRole[] = [{ ... }, ...];
         expect(actualState.roles).toEqual(ROLES);
     });
 ```
-##10. Write Action Types as "domain/eventName"
+## 10. Write Action Types as "domain/eventName"
 > Reason: this is consistent with [Official Redux Style Guide](https://redux.js.org/style-guide/style-guide#write-action-types-as-domaineventname)
 ```typescript
 //Example
 export const UPDATE = 'callQueue/update';
 ```
-##11. Avoid having one reducer
+## 11. Avoid having one reducer
 > Reason: this principle allows to increase readability of reducers due to their limited scope, and facilitate the testing
 ```typescript
 //Example
