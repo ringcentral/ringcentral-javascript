@@ -1,3 +1,5 @@
+require('@rushstack/eslint-patch/modern-module-resolution');
+
 module.exports = {
     root: true,
     plugins: ['prettier'], //FIXME [UIA-10000] Remove
@@ -15,7 +17,7 @@ module.exports = {
         'plugin:import/typescript',
     ],
     rules: {
-        'curly': 'error',
+        curly: 'error',
         'prettier/prettier': [
             'error',
             {
