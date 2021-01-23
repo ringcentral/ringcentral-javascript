@@ -4,9 +4,9 @@
 
 This is a set of recommended patterns and best practices for writing applications using React+Redux.
 
-## 1. Put all Redux codes in `redux` directory inside your module 
+## # Put all Redux codes in `redux` directory inside your module 
 > Reason: this helps to keep module isolated
-## 2. Use selectors to get data from the Redux state
+## # Use selectors to get data from the Redux state
 > Reason: selectors allow hiding data structure and manipulation logic from a component. A selector is not recomputed unless one of its arguments changes.
 ```typescript
 // BAD
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => ({
     someProp: somePropSelector(state),
 });
 ```
-## 2.1. Do not use `createSelector` to create a selector for data that should not be cached in it
+## # Do not use `createSelector` to create a selector for data that should not be cached in it
 > Reason: `createSelector` uses memoization to keep selector results. When selector results change too often or remain the same, using `createSelector` may lead to performance issues.     
 ```typescript
 // BAD
@@ -51,8 +51,8 @@ export const currentUserSettingsSelector = createSelector(
     (usersSettings) => usersSettings.filter((userSettings) => userSettings.userId === getCurrentUserId()),
 );
 ```
-## 3. Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
-## 4. Use string constants instead of inline strings for action types
+## # Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
+## # Use string constants instead of inline strings for action types
 > Reason: It helps keep the naming consistent and allows to gather all action types in one place
 ```typescript
 // BAD
@@ -64,7 +64,7 @@ const UPDATE_ACTIVE_ITEM_SETTINGS = 'policies/update_active_item_settings';
 ...
 createAction(UPDATE_ACTIVE_ITEM_SETTINGS, {nextSettings})
 ```
-## 5. Keep reducers clean by moving logic to helpers
+## # Keep reducers clean by moving logic to helpers
 > Reason: a lot of logic inside the reducer complicates an understanding of data changes produced by the action
 ```typescript
 // BAD
@@ -106,7 +106,7 @@ export const someReducer: Reducer<SomeStore, ActionTypes> = (state = initialStat
     }
 };
 ```  
-## 6. Put Redux connection logic to Containers
+## # Put Redux connection logic to Containers
 > Reason: this makes the connection between a React component and Redux storage more transparent and isolated.
 ```typescript
 // EXAMPLE
@@ -129,7 +129,7 @@ export const FilterContainer: React.FC<{}> = connect(
 )(Filter);
 
 ```
-## 7. Add typings for actions
+## # Add typings for actions
 ```typescript
 // EXAMPLE
 const UPDATE_USER = 'users/updateUser';
@@ -155,7 +155,7 @@ export const someReducer: Reducer<UsersStore, UpdateAction | RemoveAction> = (
     action,
 ) => { ... };
 ```
-## 8. Minimize the use of "blind spreads/returns" 
+## # Minimize the use of "blind spreads/returns" 
 > Reason: this improves readability of a reducer
 ```typescript
 // BAD
@@ -184,7 +184,7 @@ export const someReducer: Reducer<UsersStore, UpdateAction | RemoveAction> = (
     }
 ... 
 ``` 
-## 9. Always write unit tests for reducers
+## # Always write unit tests for reducers
 > Reason: a reducer is one of the most sensitive places of the redux code, a modification can have a lot of impact on the application. On the other hand, this code is relatively easy to test, so writing unit tests is a convenient way to be sure the reducer works as expected, and some changes don't affect it. 
 ```typescript
 // EXAMPLE
@@ -199,7 +199,7 @@ const ROLES: SomeRole[] = [{ ... }, ...];
         expect(actualState.roles).toEqual(ROLES);
     });
 ```
-## 10. Keep only action names in `/moduleName/redux/constants.ts` file.
+## # Keep only action names in `/moduleName/redux/constants.ts` file.
 ```typescript
 // BAD
 // src/app/modules/extensions/redux/constants.ts
@@ -215,7 +215,7 @@ export const FETCH_EXTENSIONS = 'extensions/fetch';
 // src/app/modules/extensions/constants.ts
 export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
 ```
-## 11. Write Action Types as "domain/eventName"
+## # Write action types as "domain/eventName"
 > Reason: this is consistent with [Official Redux Style Guide](https://redux.js.org/style-guide/style-guide#write-action-types-as-domaineventname)
 ```typescript
 // EXAMPLE
@@ -223,25 +223,25 @@ export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
 export const UPDATE_NAME = 'callQueue/updateName';
 export const LOAD_FAILURE = 'callQueue/load/failure';
 ```
-## 12. Avoid having one reducer
+## # Avoid having one reducer
 > Reason: this principle allows to increase readability of reducers due to their limited scope, and facilitate the testing
 ```typescript
 // EXAMPLE
 // reducer.ts
 import {combineReducers} from 'redux';
-import {entity1Reducer} from './entyty1/reducer';
-import {entity2Reducer} from './entyty2/reducer';
-import {entity3Reducer} from './entyty3/reducer';
+import {usersReducer} from './users/reducer';
+import {commentsReducer} from './comments/reducer';
+import {postsReducer} from './posts/reducer';
 
-let entitiesReducersMap = {
-    entity1: entity1Reducer,
-    entity2: entity2Reducer,
-    entity3: entity3Reducer,
+let appReducersMap = {
+    users: usersReducer,
+    comments: commentsReducer,
+    posts: postsReducer,
 };
 
-export const entitiesStore = combineReducers(entitiesReducersMap);
+export const appStore = combineReducers(appReducersMap);
 ```
-## 13. The name of reducer should be equal to a folder name containing it and to a namespace key in 'actions' 
+## # The name of reducer should be equal to a folder name containing it and to a namespace key in 'actions' 
 ```typescript
 // EXAMPLE
 // src/app/modules/extensions/redux/reducer.ts
@@ -260,7 +260,7 @@ export const FETCH_EXTENSIONS = 'extensions/fetch';
 export const UPDATE_CALL_QUEUE_NAME = 'callQueues/updateName';
 ...
 ```
-## 14. Add typings for dispatching functions in action creators
+## # Add typings for dispatching functions in action creators
 ```typescript
 // BAD
 export const deleteUser = (id: Identifier) => (dispatch, getState) => {
@@ -276,11 +276,11 @@ export const deleteUser = (id: Identifier) => (dispatch: Dispatch, getState: Roo
     dispatch<DeleteUserAction>(createAction(DELETE_USER, id))
 }
 ```
-## 15. Do not overuse Redux, but prefer it to other approaches when possible.
+## # Do not overuse Redux, but prefer it to other approaches when possible.
 React allows us to store everything inside components, no matter if we deal with functional or class components. But this approach may lead to readability and maintainability problems when an application becomes bigger. Redux is a good place to keep an application state and updating logic in isolation from UI components. 
 
 Here are some hints when we better prefer Redux and when not.
-#### 15.1. Use prop passing when we have up to 3 levels of children components.
+#### ## Use prop passing when we have up to 3 levels of children components.
 ```typescript
 // EXAMPLE
 const Parent = () => {
@@ -302,7 +302,7 @@ const GrandChild = ({ value, onUpdateValue }) => (
   ...
 );
 ```  
-#### 15.2. Prefer context when: 
+#### ## Prefer context when: 
 - we should pass values deeper than 3 levels down
 - there is no need to have centralized storage of state and logic
 - the size of state seems to keep small
@@ -355,4 +355,4 @@ const GridBody = () => (
     );
 )
 ``` 
-#### 15.3. Redux should be used in all other cases.
+#### ## Redux should be used in all other cases.
