@@ -6,6 +6,7 @@ This is a set of recommended patterns and best practices for writing application
 
 ## # Put all Redux codes in `redux` directory inside your module 
 > Reason: this helps to keep module isolated
+
 ## # Use selectors to get data from the Redux state
 > Reason: selectors allow hiding data structure and manipulation logic from a component. A selector is not recomputed unless one of its arguments changes.
 ```typescript
@@ -30,6 +31,7 @@ const mapStateToProps = (state) => ({
     someProp: somePropSelector(state),
 });
 ```
+
 ## # Do not use `createSelector` to create a selector for data that should not be cached in it
 > Reason: `createSelector` uses memoization to keep selector results. When selector results change too often or remain the same, using `createSelector` may lead to performance issues.     
 ```typescript
@@ -51,7 +53,9 @@ export const currentUserSettingsSelector = createSelector(
     (usersSettings) => usersSettings.filter((userSettings) => userSettings.userId === getCurrentUserId()),
 );
 ```
+
 ## # Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
+
 ## # Use string constants instead of inline strings for action types
 > Reason: It helps keep the naming consistent and allows to gather all action types in one place
 ```typescript
@@ -64,6 +68,7 @@ const UPDATE_ACTIVE_ITEM_SETTINGS = 'policies/update_active_item_settings';
 ...
 createAction(UPDATE_ACTIVE_ITEM_SETTINGS, {nextSettings})
 ```
+
 ## # Keep reducers clean by moving logic to helpers
 > Reason: a lot of logic inside the reducer complicates an understanding of data changes produced by the action
 ```typescript
@@ -105,7 +110,8 @@ export const someReducer: Reducer<SomeStore, ActionTypes> = (state = initialStat
             }
     }
 };
-```  
+``` 
+ 
 ## # Put Redux connection logic to Containers
 > Reason: this makes the connection between a React component and Redux storage more transparent and isolated.
 ```typescript
@@ -127,8 +133,25 @@ export const FilterContainer: React.FC<{}> = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(Filter);
-
 ```
+
+## # All connected components should be defined in a separate files
+```typescript
+// BAD
+...
+const Component = () => { ... };
+connect(mapStateToProps, mapDispatchToProps)(Component);
+```
+```typescript
+// GOOD
+//component.tsx
+export const Component = () => { ... };
+// container.ts
+import Component from './component';
+...
+connect(mapStateToProps, mapDispatchToProps)(Component)
+```
+
 ## # Add typings for actions
 ```typescript
 // EXAMPLE
@@ -155,6 +178,7 @@ export const someReducer: Reducer<UsersStore, UpdateAction | RemoveAction> = (
     action,
 ) => { ... };
 ```
+
 ## # Minimize the use of "blind spreads/returns" 
 > Reason: this improves readability of a reducer
 ```typescript
@@ -184,6 +208,7 @@ export const someReducer: Reducer<UsersStore, UpdateAction | RemoveAction> = (
     }
 ... 
 ``` 
+
 ## # Always write unit tests for reducers
 > Reason: a reducer is one of the most sensitive places of the redux code, a modification can have a lot of impact on the application. On the other hand, this code is relatively easy to test, so writing unit tests is a convenient way to be sure the reducer works as expected, and some changes don't affect it. 
 ```typescript
@@ -199,6 +224,7 @@ const ROLES: SomeRole[] = [{ ... }, ...];
         expect(actualState.roles).toEqual(ROLES);
     });
 ```
+
 ## # Keep only action names in `/moduleName/redux/constants.ts` file.
 ```typescript
 // BAD
@@ -215,6 +241,7 @@ export const FETCH_EXTENSIONS = 'extensions/fetch';
 // src/app/modules/extensions/constants.ts
 export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
 ```
+
 ## # Write action types as "domain/eventName"
 > Reason: this is consistent with [Official Redux Style Guide](https://redux.js.org/style-guide/style-guide#write-action-types-as-domaineventname)
 ```typescript
@@ -223,6 +250,7 @@ export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
 export const UPDATE_NAME = 'callQueue/updateName';
 export const LOAD_FAILURE = 'callQueue/load/failure';
 ```
+
 ## # Avoid having one reducer
 > Reason: this principle allows to increase readability of reducers due to their limited scope, and facilitate the testing
 ```typescript
@@ -241,6 +269,7 @@ let appReducersMap = {
 
 export const appStore = combineReducers(appReducersMap);
 ```
+
 ## # The name of reducer should be equal to a folder name containing it and to a namespace key in 'actions' 
 ```typescript
 // EXAMPLE
@@ -260,6 +289,7 @@ export const FETCH_EXTENSIONS = 'extensions/fetch';
 export const UPDATE_CALL_QUEUE_NAME = 'callQueues/updateName';
 ...
 ```
+
 ## # Add typings for dispatching functions in action creators
 ```typescript
 // BAD
@@ -276,6 +306,7 @@ export const deleteUser = (id: Identifier) => (dispatch: Dispatch, getState: Roo
     dispatch<DeleteUserAction>(createAction(DELETE_USER, id))
 }
 ```
+
 ## # Do not overuse Redux, but prefer it to other approaches when possible.
 React allows us to store everything inside components, no matter if we deal with functional or class components. But this approach may lead to readability and maintainability problems when an application becomes bigger. Redux is a good place to keep an application state and updating logic in isolation from UI components. 
 
@@ -356,3 +387,72 @@ const GridBody = () => (
 )
 ``` 
 #### ## Redux should be used in all other cases.
+
+## # `connect` arguments should have recommended names: `mapStateToProps, mapDispatchToProps, mergeProps, options`
+```typescript
+// BAD 
+connect(mapStateToProps, actionCreators)(App)
+```
+```typescript
+// GOOD
+connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
+```
+
+## # Action creators and actions should be put into separate `actions` file (ex.`redux/actions.ts`). `mapDispatchToProps` uses a shorthand to wrap actions in dispatch calls
+```typescript
+// BAD
+const mapDispatchToProps = (dispatch) => ({
+  getData: async (id) => {const data = await fetchData(id); dispatch(createAction(FETCH_DATA, {data}))},
+})
+```
+```typescript
+// GOOD
+// actions.ts
+...
+const getData = (id) => async (dispatch, getState) => {
+    const data = await fetchData(id); 
+    dispatch(createAction(FETCH_DATA, {data}));
+}
+...
+
+// container.ts
+import {getData} from 'actions.ts';
+...
+const mapDispatchToProps = {
+    getData,
+}
+...
+```
+
+## # Middleware parameters have specific names: `dispatch` and `getState`
+```typescript
+// BAD
+// actions.ts
+const updateUser = (id, userData) => (forward, state) => { ... }
+```
+```typescript
+// GOOD
+// actions.ts
+const updateUser = (id, userData) => (dispatch, getState) => { ... }
+```
+
+## # `mapStateToProps` parameters have specific names: `state`, `ownProps`
+```typescript
+// BAD
+const mapStateToProps = (store) => {}
+```
+```typescript
+// GOOD
+const mapStateToProps = (state) => {}
+```
+
+## # `mapStateToProps` should not bind complete store to a component
+> Reason: Passing whole state to a component is a bad practice, triggering unnecessary re-renders.
+```typescript
+// BAD
+const mapStateToProps = (state) => state
+```
+```typescript
+// GOOD
+const mapStateToProps = (state) => {isActive: state.isActive}
+```
