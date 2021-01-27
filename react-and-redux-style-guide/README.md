@@ -1,73 +1,18 @@
 # RingCentral React and Redux Style Guide
 
-## Introduction
+- [Introduction](#introduction)
+- [Code structure](#code-structure)
+- [Naming](#naming)
+- [Good practices](#good-practices)
+
+# Introduction
 
 This is a set of recommended patterns and best practices for writing applications using React+Redux.
 
+# Code structure
+
 ## # Put all Redux codes in `redux` directory inside your module 
 > Reason: this helps to keep module isolated
-
-## # Use selectors to get data from the Redux state
-> Reason: selectors allow hiding data structure and manipulation logic from a component. A selector is not recomputed unless one of its arguments changes.
-```typescript
-// BAD
-// /containers/SomeContainer.tsx
-const mapStateToProps = ({exampleStore, oneMoreStore}) => ({
-    currentItem: exampleStore.items.filter((item) => {item.isCurrent}),
-    someProp: oneMoreStore.someProp
-});
-```
-```typescript
-// GOOD
-// /redux/selectors/selectors.ts
-export const currentItemSelector = createSelector<ReduxStore, ExampleStore, string>(
-    exampleStore => exampleStore.items,
-    (items) => items.filter((item) => {item.isCurrent}),
-);
-...
-// /containers/SomeContainer.tsx
-const mapStateToProps = (state) => ({
-    currentItem: currentItemSelector(state),
-    someProp: somePropSelector(state),
-});
-```
-
-## # Do not use `createSelector` to create a selector for data that should not be cached in it
-> Reason: `createSelector` uses memoization to keep selector results. When selector results change too often or remain the same, using `createSelector` may lead to performance issues.     
-```typescript
-// BAD
-export const settingsStoreSelector = createSelector(
-    ({settingsStore}) => settingsStore,
-    (settingsStore) => settingsStore,
-);
-export const currentUserSettingsSelector = createSelector(
-    settingsStoreSelector,
-    ({usersSettings}) => usersSettings.filter((userSettings) => userSettings.userId === getCurrentUserId()),
-);
-```
-```typescript
-// GOOD
-const usersSettingsSelector = (state) => state.settingsStore.usersSettings;
-export const currentUserSettingsSelector = createSelector(
-    usersSettingsSelector,
-    (usersSettings) => usersSettings.filter((userSettings) => userSettings.userId === getCurrentUserId()),
-);
-```
-
-## # Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
-
-## # Use string constants instead of inline strings for action types
-> Reason: It helps keep the naming consistent and allows to gather all action types in one place
-```typescript
-// BAD
-createAction('update_active_policies_item_settings', {nextSettings})
-```
-```typescript
-// GOOD
-const UPDATE_ACTIVE_ITEM_SETTINGS = 'policies/update_active_item_settings';
-...
-createAction(UPDATE_ACTIVE_ITEM_SETTINGS, {nextSettings})
-```
 
 ## # Keep reducers clean by moving logic to helpers
 > Reason: a lot of logic inside the reducer complicates an understanding of data changes produced by the action
@@ -152,6 +97,195 @@ import Component from './component';
 connect(mapStateToProps, mapDispatchToProps)(Component)
 ```
 
+## # Keep only action names in `/moduleName/redux/constants.ts` file.
+```typescript
+// BAD
+// src/app/modules/extensions/redux/constants.ts
+export const FETCH_EXTENSIONS = 'extensions/fetch';
+export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
+...
+```
+```typescript
+// GOOD
+// src/app/modules/extensions/redux/constants.ts
+export const FETCH_EXTENSIONS = 'extensions/fetch';
+
+// src/app/modules/extensions/constants.ts
+export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
+```
+
+## # Avoid having one reducer
+> Reason: this principle allows to increase readability of reducers due to their limited scope, and facilitate the testing
+```typescript
+// EXAMPLE
+// reducer.ts
+import {combineReducers} from 'redux';
+import {usersReducer} from './users/reducer';
+import {commentsReducer} from './comments/reducer';
+import {postsReducer} from './posts/reducer';
+
+let appReducersMap = {
+    users: usersReducer,
+    comments: commentsReducer,
+    posts: postsReducer,
+};
+
+export const appStore = combineReducers(appReducersMap);
+```
+
+## # Action creators and actions should be put into separate `actions` file (ex.`redux/actions.ts`). `mapDispatchToProps` uses a shorthand to wrap actions in dispatch calls
+```typescript
+// BAD
+const mapDispatchToProps = (dispatch) => ({
+  getData: async (id) => {const data = await fetchData(id); dispatch(createAction(FETCH_DATA, {data}))},
+})
+```
+```typescript
+// GOOD
+// actions.ts
+...
+const getData = (id) => async (dispatch, getState) => {
+    const data = await fetchData(id); 
+    dispatch(createAction(FETCH_DATA, {data}));
+}
+...
+
+// container.ts
+import {getData} from 'actions.ts';
+...
+const mapDispatchToProps = {
+    getData,
+}
+...
+```
+
+# Naming
+
+## # Use string constants instead of inline strings for action types
+> Reason: It helps keep the naming consistent and allows to gather all action types in one place
+```typescript
+// BAD
+createAction('update_active_policies_item_settings', {nextSettings})
+```
+```typescript
+// GOOD
+const UPDATE_ACTIVE_ITEM_SETTINGS = 'policies/update_active_item_settings';
+...
+createAction(UPDATE_ACTIVE_ITEM_SETTINGS, {nextSettings})
+```
+
+## # Write action types as "domain/eventName"
+> Reason: this is consistent with [Official Redux Style Guide](https://redux.js.org/style-guide/style-guide#write-action-types-as-domaineventname)
+```typescript
+// EXAMPLE
+// src/app/modules/callQueues/redux/constants.ts
+export const UPDATE_NAME = 'callQueue/updateName';
+export const LOAD_FAILURE = 'callQueue/load/failure';
+```
+
+## # The name of reducer should be equal to a folder name containing it and to a namespace key in 'actions' 
+```typescript
+// EXAMPLE
+// src/app/modules/extensions/redux/reducer.ts
+import {callQueuesReducer} from './callQueues/reducer';
+
+const extensionsReducersMap = {
+    callQueues: callQueuesReducer,
+    ...
+}
+export const extensionsReducer = combineReducers(extensionsReducersMap);
+
+// src/app/modules/extensions/redux/constants.ts
+export const FETCH_EXTENSIONS = 'extensions/fetch';
+
+// src/app/modules/extensions/redux/callQueues/constants.ts
+export const UPDATE_CALL_QUEUE_NAME = 'callQueues/updateName';
+...
+```
+
+## # `connect` arguments should have recommended names: `mapStateToProps, mapDispatchToProps, mergeProps, options`
+```typescript
+// BAD 
+connect(mapStateToProps, actionCreators)(App)
+```
+```typescript
+// GOOD
+connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
+```
+
+## # Middleware parameters have specific names: `dispatch` and `getState`
+```typescript
+// BAD
+// actions.ts
+const updateUser = (id, userData) => (forward, state) => { ... }
+```
+```typescript
+// GOOD
+// actions.ts
+const updateUser = (id, userData) => (dispatch, getState) => { ... }
+```
+
+## # `mapStateToProps` parameters have specific names: `state`, `ownProps`
+```typescript
+// BAD
+const mapStateToProps = (store) => {}
+```
+```typescript
+// GOOD
+const mapStateToProps = (state) => {}
+```
+
+# Good practices
+
+## # Use selectors to get data from the Redux state
+> Reason: selectors allow hiding data structure and manipulation logic from a component. A selector is not recomputed unless one of its arguments changes.
+```typescript
+// BAD
+// /containers/SomeContainer.tsx
+const mapStateToProps = ({exampleStore, oneMoreStore}) => ({
+    currentItem: exampleStore.items.filter((item) => {item.isCurrent}),
+    someProp: oneMoreStore.someProp
+});
+```
+```typescript
+// GOOD
+// /redux/selectors/selectors.ts
+export const currentItemSelector = createSelector<ReduxStore, ExampleStore, string>(
+    exampleStore => exampleStore.items,
+    (items) => items.filter((item) => {item.isCurrent}),
+);
+...
+// /containers/SomeContainer.tsx
+const mapStateToProps = (state) => ({
+    currentItem: currentItemSelector(state),
+    someProp: somePropSelector(state),
+});
+```
+
+## # Do not use `createSelector` to create a selector for data that should not be cached in it
+> Reason: `createSelector` uses memoization to keep selector results. When selector results change too often or remain the same, using `createSelector` may lead to performance issues.     
+```typescript
+// BAD
+export const settingsStoreSelector = createSelector(
+    ({settingsStore}) => settingsStore,
+    (settingsStore) => settingsStore,
+);
+export const currentUserSettingsSelector = createSelector(
+    settingsStoreSelector,
+    ({usersSettings}) => usersSettings.filter((userSettings) => userSettings.userId === getCurrentUserId()),
+);
+```
+```typescript
+// GOOD
+const usersSettingsSelector = (state) => state.settingsStore.usersSettings;
+export const currentUserSettingsSelector = createSelector(
+    usersSettingsSelector,
+    (usersSettings) => usersSettings.filter((userSettings) => userSettings.userId === getCurrentUserId()),
+);
+```
+
+## # Use `createAction`, `createDataRequestAction` and other similar functions to reduce duplication of boilerplate code
+
 ## # Add typings for actions
 ```typescript
 // EXAMPLE
@@ -223,71 +357,6 @@ const ROLES: SomeRole[] = [{ ... }, ...];
         });
         expect(actualState.roles).toEqual(ROLES);
     });
-```
-
-## # Keep only action names in `/moduleName/redux/constants.ts` file.
-```typescript
-// BAD
-// src/app/modules/extensions/redux/constants.ts
-export const FETCH_EXTENSIONS = 'extensions/fetch';
-export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
-...
-```
-```typescript
-// GOOD
-// src/app/modules/extensions/redux/constants.ts
-export const FETCH_EXTENSIONS = 'extensions/fetch';
-
-// src/app/modules/extensions/constants.ts
-export const EXTENSIONS_MAIN_CONSTANT_VALUE = 42;
-```
-
-## # Write action types as "domain/eventName"
-> Reason: this is consistent with [Official Redux Style Guide](https://redux.js.org/style-guide/style-guide#write-action-types-as-domaineventname)
-```typescript
-// EXAMPLE
-// src/app/modules/callQueues/redux/constants.ts
-export const UPDATE_NAME = 'callQueue/updateName';
-export const LOAD_FAILURE = 'callQueue/load/failure';
-```
-
-## # Avoid having one reducer
-> Reason: this principle allows to increase readability of reducers due to their limited scope, and facilitate the testing
-```typescript
-// EXAMPLE
-// reducer.ts
-import {combineReducers} from 'redux';
-import {usersReducer} from './users/reducer';
-import {commentsReducer} from './comments/reducer';
-import {postsReducer} from './posts/reducer';
-
-let appReducersMap = {
-    users: usersReducer,
-    comments: commentsReducer,
-    posts: postsReducer,
-};
-
-export const appStore = combineReducers(appReducersMap);
-```
-
-## # The name of reducer should be equal to a folder name containing it and to a namespace key in 'actions' 
-```typescript
-// EXAMPLE
-// src/app/modules/extensions/redux/reducer.ts
-import {callQueuesReducer} from './callQueues/reducer';
-
-const extensionsReducersMap = {
-    callQueues: callQueuesReducer,
-    ...
-}
-export const extensionsReducer = combineReducers(extensionsReducersMap);
-
-// src/app/modules/extensions/redux/constants.ts
-export const FETCH_EXTENSIONS = 'extensions/fetch';
-
-// src/app/modules/extensions/redux/callQueues/constants.ts
-export const UPDATE_CALL_QUEUE_NAME = 'callQueues/updateName';
-...
 ```
 
 ## # Add typings for dispatching functions in action creators
@@ -387,64 +456,6 @@ const GridBody = () => (
 )
 ``` 
 #### ## Redux should be used in all other cases.
-
-## # `connect` arguments should have recommended names: `mapStateToProps, mapDispatchToProps, mergeProps, options`
-```typescript
-// BAD 
-connect(mapStateToProps, actionCreators)(App)
-```
-```typescript
-// GOOD
-connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
-```
-
-## # Action creators and actions should be put into separate `actions` file (ex.`redux/actions.ts`). `mapDispatchToProps` uses a shorthand to wrap actions in dispatch calls
-```typescript
-// BAD
-const mapDispatchToProps = (dispatch) => ({
-  getData: async (id) => {const data = await fetchData(id); dispatch(createAction(FETCH_DATA, {data}))},
-})
-```
-```typescript
-// GOOD
-// actions.ts
-...
-const getData = (id) => async (dispatch, getState) => {
-    const data = await fetchData(id); 
-    dispatch(createAction(FETCH_DATA, {data}));
-}
-...
-
-// container.ts
-import {getData} from 'actions.ts';
-...
-const mapDispatchToProps = {
-    getData,
-}
-...
-```
-
-## # Middleware parameters have specific names: `dispatch` and `getState`
-```typescript
-// BAD
-// actions.ts
-const updateUser = (id, userData) => (forward, state) => { ... }
-```
-```typescript
-// GOOD
-// actions.ts
-const updateUser = (id, userData) => (dispatch, getState) => { ... }
-```
-
-## # `mapStateToProps` parameters have specific names: `state`, `ownProps`
-```typescript
-// BAD
-const mapStateToProps = (store) => {}
-```
-```typescript
-// GOOD
-const mapStateToProps = (state) => {}
-```
 
 ## # `mapStateToProps` should not bind complete store to a component
 > Reason: Passing whole state to a component is a bad practice, triggering unnecessary re-renders.
