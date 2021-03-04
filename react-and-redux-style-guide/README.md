@@ -262,8 +262,8 @@ const mapStateToProps = (state) => ({
 });
 ```
 
-## # Do not use `createSelector` to create a selector for data that should not be cached in it
-> Reason: `createSelector` uses memoization to keep selector results. When selector results change too often or remain the same, using `createSelector` may lead to performance issues.     
+## # Do not use `createSelector` to create selectors for frequently changed data or to access big parts of the state
+> Reason: `createSelector` uses memoization to keep selector results. If you access big parts of the state, these parts are very likely to change on every action, in this case `createSelector` may lead to performance issues due to lots of useless caching operations.     
 ```typescript
 // BAD
 export const settingsStoreSelector = createSelector(
