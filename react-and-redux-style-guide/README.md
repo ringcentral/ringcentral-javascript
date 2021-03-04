@@ -467,3 +467,34 @@ const mapStateToProps = (state) => state
 // GOOD
 const mapStateToProps = (state) => ({activeItem: activeItemSelector(state)});
 ```
+
+## # One action may cause multiple reducers to change state
+> Actions do not match reducers 1-to-1, one action may cause a ripple effect in sub-states. Use this technique to make
+  linked changes in many states based on user interactions.
+```typescript
+function perPageReducer(state = DEFAULT_ITEMS_PER_PAGE, action) {
+    switch (action.type) {
+        case 'SET_PER_PAGE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+function pageReducer(state = DEFAULT_PAGE, action) {
+    switch (action.type) {
+        case 'SET_PAGE':
+            return action.payload;
+        case 'SET_PER_PAGE': // handled also by another reducer
+            return DEFAULT_PAGE; // you can have calculation logic to move user to correct page instead of page 1
+        default:
+            return state;
+    }
+}
+```
+
+## # Only show as much of the redux state to a component as it needs by slicing exact parts of state
+> Keep all components as stupid as possible: React pure render optimizations allows to re-render components ONLY if
+  something visible data changes, so never supply a whole chunk of state to a component, first, break it to simpler
+  things or even to primitives.
+
