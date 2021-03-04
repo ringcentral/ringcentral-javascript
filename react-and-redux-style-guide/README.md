@@ -465,5 +465,5 @@ const mapStateToProps = (state) => state
 ```
 ```typescript
 // GOOD
-const mapStateToProps = (state) => {isActive: state.isActive}
+const mapStateToProps = (state) => ({activeItem: activeItemSelector(state)});
 ```
