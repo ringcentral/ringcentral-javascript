@@ -1,28 +1,18 @@
-# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors and IDEs
-# http://editorconfig.org
-
 root = true
 
 [*]
-# indentation
 indent_style = space
-
-# generic
-charset = utf-8
 end_of_line = lf
+charset = utf-8
 trim_trailing_whitespace = true
-insert_final_newline = true
+insert_final_newline = false
+max_line_length = 120
 
-[*.md]
-trim_trailing_whitespace = false
-
-# json
-[*.json]
-indent_style = space
+[*.{js,jsx,ts,tsx}]
 indent_size = 4
 
-# npm, bower packages
-[{package.json, bower.json}]
-indent_style = space
+[*.{css,sass,scss,less,yml,yaml,graphql,graphqls,json,md,mdx}]
 indent_size = 2
+
+[Makefile]
+indent_style = tab
