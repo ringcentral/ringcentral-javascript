@@ -105,6 +105,7 @@ indent_style = tab
 Create `.husky/pre-commit`:
 
 ```bash
+#!/bin/bash
 yarn lint:staged
 ```
 

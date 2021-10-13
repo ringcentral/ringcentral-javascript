@@ -3,7 +3,7 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 module.exports = {
     root: true,
     extends: [
-        require.resolve('eslint/conf/eslint-recommended'),
+        'eslint:recommended',
         'plugin:import/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:react/recommended',
