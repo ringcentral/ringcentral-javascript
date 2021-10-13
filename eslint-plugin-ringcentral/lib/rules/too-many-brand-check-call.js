@@ -85,7 +85,7 @@ module.exports = {
                             .join(', ');
                         context.report(
                             node,
-                            `Call brand check method too many times [${calleeNames}], please add a new field (isXXXX) in 'src/logic/src/brands/features/brandFeaturesConfig.ts', and use "getBrandFeatures().isXXXX" here.`,
+                            `Call brand check method too many times [${calleeNames}], please add a new field (isXXXX) in 'brandFeaturesConfig', and use "getBrandFeatures().isXXXX" here.`,
                         );
                     }
                 }
