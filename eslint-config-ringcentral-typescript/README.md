@@ -21,8 +21,8 @@ Add this to `scripts` section of `package.json`:
 {
   "scripts": {
     "eslint": "eslint --cache --cache-location node_modules/.cache/eslint --fix",
-    "prettier": "prettier --write --ignore-path=.eslintignore",
-    "lint:all": "yarn prettier . && yarn eslint .",
+    "prettier": "prettier --write --ignore-path=.eslintignore --loglevel=warn",
+    "lint:all": "yarn eslint . && yarn prettier . ",
     "lint:staged": "lint-staged --debug",
     "prepare": "husky install",     // yarn 1 and npm
     "postinstall": "husky install", // yarn 2 private packages
@@ -32,22 +32,23 @@ Add this to `scripts` section of `package.json`:
 
 Notes:
 
-- You can add `--quiet` to suppress warnings, but that's not recommended.
-- You can add `DEBUG=eslint:cli-engine` to output files that were linted.
+- You can add `--quiet` to suppress warnings, but that's not recommended
+- You can add `DEBUG=eslint:cli-engine` to output files that were linted
 - See Husky documentation for detailed instructions for [Yarn 2 and public package](https://typicode.github.io/husky/#/?id=yarn-2).
+- `lint:all` calls ESLint and then Prettier to make sure style is taken from Prettier, other way around also possible, [read more here](https://github.com/prettier/prettier-eslint#prettierlast-boolean)
+- Remove `--loglevel=warn` from `prettier` command to see the list of files, keep in mind that this list can shift valuable information from ESLint out of sight
 
 ## Ignore files
 
 Add `.eslintignore` file, usually look like this:
 
 ```gitignore
+.idea
 .husky
 .pnp.js
+.pnp.cjs
 .yarn
-coverage
 node_modules
-storybook-static
-dist
 ```
 
 ## Eslintrc
@@ -67,15 +68,24 @@ Create `.eslintrc`:
 Create `.prettierrc.js` (optional):
 
 ```js
+module.exports = require('eslint-config-ringcentral-typescript/src/prettier');
+```
+
+Or with overrides:
+
+```js
 module.exports = {
     ...require('eslint-config-ringcentral-typescript/src/prettier'),
-    // overrides if needed
+    printWidth: 140,
+    jsxBracketSameLine: false,
 }
 ```
 
 ## Editorconfig
 
-Create a `.editorconfig`, it's optional but useful for `Makefile`, if you have any:
+Optional, but useful for `Makefile`, if you have any.
+
+Create a `.editorconfig`:
 
 ```ini
 root = true

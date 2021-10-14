@@ -18,6 +18,7 @@ module.exports = {
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/indent': 'off', // prettier takes care of it
         '@typescript-eslint/no-shadow': 'error',
+        'react/jsx-closing-bracket-location': 'off' // prettier takes care of it
     },
     env: {
         browser: true,
