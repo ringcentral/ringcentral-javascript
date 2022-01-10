@@ -8,7 +8,7 @@
     "publish:release": "lerna publish --tag-version-prefix=\"\" --force-publish=* --no-push --no-git-tag-version"
   },
   "dependencies": {
-    "lerna": "3.19.0"
+    "lerna": "4.0.0"
   },
   "repository": {
     "type": "git",
