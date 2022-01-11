@@ -28,5 +28,12 @@ module.exports = {
         react: {
             version: 'detect',
         },
+        // @see https://github.com/alexgorbatchev/eslint-import-resolver-typescript
+        // @see https://github.com/import-js/eslint-plugin-import/issues/1282#issuecomment-600907820
+        'import/resolver': {
+            'typescript': {
+                'alwaysTryTypes': true,
+            }
+        }
     },
 };

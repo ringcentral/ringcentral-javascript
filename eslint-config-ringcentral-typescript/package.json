@@ -16,6 +16,7 @@
     "eslint-config-react-app": "7.0.0",
     "eslint-config-ringcentral": "1.0.0",
     "eslint-import-resolver-node": "0.3.6",
+    "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-flowtype": "8.0.3",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jest": "25.3.4",
