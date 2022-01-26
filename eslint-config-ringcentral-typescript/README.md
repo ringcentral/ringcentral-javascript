@@ -25,7 +25,7 @@ Add this to `scripts` section of `package.json`:
     "lint:all": "yarn eslint . && yarn prettier . ",
     "lint:staged": "lint-staged --debug",
     "prepare": "husky install",     // yarn 1 and npm
-    "postinstall": "husky install", // yarn 2 private packages
+    "postinstall": "husky install", // yarn 2 or private packages
   }
 }
 ```
@@ -50,6 +50,8 @@ Add `.eslintignore` file, usually look like this:
 .yarn
 node_modules
 ```
+
+P.S. You can also create `.prettierignore` file with same content to make sure IDE Prettier plugin ignores same files, or point plugin to same `.eslintignore': https://youtrack.jetbrains.com/issue/WEB-43597
 
 ## Eslintrc
 
@@ -124,12 +126,12 @@ Create `.lintstagedrc`:
 
 ```json
 {
-  "*.{js,jsx,ts,tsx,css,sass,scss,less,yml,yaml,graphql,graphqls,json,md,mdx}": [
-    "yarn prettier",
-    "git add"
-  ],
   "*.{js,jsx,ts,tsx}": [
     "yarn eslint",
+    "git add"
+  ],
+  "*.{js,jsx,ts,tsx,css,sass,scss,less,yml,yaml,graphql,graphqls,json,md,mdx}": [
+    "yarn prettier",
     "git add"
   ]
 }
@@ -139,3 +141,24 @@ Create `.lintstagedrc`:
 
 Due to a bug you need to manually add extensions to registry: click `Help -> Find Action -> Registry`, search for
 `eslint.additional.file.extensions` and add `ts,tsx`, see https://youtrack.jetbrains.com/issue/WEB-29829#focus=streamItem-27-3182764-0-0.
+
+## Development
+
+Keep versions of dependencies from `eslint-config-react-app` in sync.
+
+```json
+{
+  "@rushstack/eslint-patch": "^1.1.0",
+  "@typescript-eslint/eslint-plugin": "^5.5.0",
+  "@typescript-eslint/parser": "^5.5.0",
+  "eslint-plugin-flowtype": "^8.0.3",
+  "eslint-plugin-import": "^2.25.3",
+  "eslint-plugin-jest": "^25.3.0",
+  "eslint-plugin-jsx-a11y": "^6.5.1",
+  "eslint-plugin-react": "^7.27.1",
+  "eslint-plugin-react-hooks": "^4.3.0",
+  "eslint-plugin-testing-library": "^5.0.1"
+}
+```
+
+So we have a `preinstall` script which will pull from proper versions from NPM and put them in place before install.
