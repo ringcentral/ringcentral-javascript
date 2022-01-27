@@ -20,6 +20,10 @@ Object.keys(fbPkg.dependencies).forEach((key) => {
         jsPkg.devDependencies[key] = version;
         console.log("\x1b[35mJaveScript\x1b[0m", "-", key, ":", version);
     }
+    if (jsPkg.dependencies[key]) {
+        jsPkg.dependencies[key] = version;
+        console.log("\x1b[35mJaveScript\x1b[0m", "-", key, ":", version);
+    }
     if (tsPkg.dependencies[key]) {
         tsPkg.dependencies[key] = version;
         console.log("\x1b[36mTypeScript\x1b[0m", "-", key, ":", version);

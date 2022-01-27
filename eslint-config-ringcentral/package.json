@@ -26,6 +26,9 @@
     "url": "https://github.com/ringcentral/ringcentral-javascript/issues"
   },
   "homepage": "https://github.com/ringcentral/ringcentral-javascript",
+  "dependencies": {
+    "@rushstack/eslint-patch": "^1.1.0"
+  },
   "devDependencies": {
     "eslint": "^8.6.0",
     "eslint-plugin-import": "^2.25.3",
@@ -34,10 +37,6 @@
     "eslint-plugin-sonarjs": "^0.11.0"
   },
   "peerDependencies": {
-    "eslint": "*",
-    "eslint-plugin-import": "*",
-    "eslint-plugin-react": "*",
-    "eslint-plugin-ringcentral": "*",
-    "eslint-plugin-sonarjs": "*"
+    "eslint": "*"
   }
 }
